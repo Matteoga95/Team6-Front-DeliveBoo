@@ -75,7 +75,7 @@ window.addEventListener("scroll", (e) => {
     </div> -->
 
     <header class="header">
-        <a href="/" class="logo">Delive<span class="yellow">roo</span></a>
+        <a href="/" class="logo">Delive<span class="yellow">boo</span></a>
 
         <nav class="navbar">
             <a href="#home">Home</a>
@@ -226,7 +226,7 @@ window.addEventListener("scroll", (e) => {
     <footer class="footer">
         <div class="top">
             <div class="content">
-                <a href="" class="logo">Delive<span class="yellow">roo</span></a>
+                <a href="" class="logo">Delive<span class="yellow">boo</span></a>
                 <p>
                     Lorem ipsum dolor sit amet,adipiscing elit. Eu, montes, metus
                     porttitor consectetur pretium. Euismod imperdiet
@@ -242,7 +242,7 @@ window.addEventListener("scroll", (e) => {
                     </div>
                     <div>
                         <img src="../assets/img/sms-tracking.svg" alt="" />
-                        <span>deliveroo@gmail.com</span>
+                        <span>deliveboo@gmail.com</span>
                     </div>
                 </div>
 
@@ -280,7 +280,7 @@ window.addEventListener("scroll", (e) => {
             </div>
         </div>
         <div class="bottom">
-            <p>Copyright © 2010-2021 Deliveroo Company S.L. All rights reserved.</p>
+            <p>Copyright © 2010-2021 Deliveboo Company S.L. All rights reserved.</p>
         </div>
     </footer>
 
