@@ -36,14 +36,7 @@ Array.from(scrollLink).map((link) => {
     });
 });
 
-/* =========== Preloader =========== */
-const preloader = document.querySelector(".preloader");
 
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        preloader.style.display = "none";
-    }, 2000);
-});
 
 /* =========== Scroll Top =========== */
 const scrollTop = document.querySelector(".scroll-top");
@@ -69,10 +62,6 @@ window.addEventListener("scroll", (e) => {
 </script>
 
 <template>
-    <!-- Preloader -->
-    <!-- <div class="preloader">
-        <img src="../assets/img/preloader.gif" alt="" />
-    </div> -->
 
     <header class="header">
         <a href="/" class="logo">Delive<span class="yellow">boo</span></a>
