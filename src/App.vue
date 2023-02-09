@@ -13,6 +13,7 @@ export default {
     <body>
 
         <AppHeader />
+        <RouterView></RouterView>
 
 
     </body>

@@ -8,12 +8,13 @@ export default {
     <header class="header">
         <div class="logo">
             <img src="../assets/img/logo-deliveboo.png" alt="">
-
         </div>
         <nav class="navbar">
             <a href="#home">Home</a>
+            <a href="#">Restaurants</a>
             <a href="http://127.0.0.1:8000/login" class="btn">Login</a>
         </nav>
+
 
         <!-- Hamburger -->
         <div class="hamburger">

@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import { router } from './router'
+
 
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
@@ -21,7 +23,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 library.add(fab, fas, far)
 
 
-// createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount('#app')
-createApp(App).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
+createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount('#app')
+// createApp(App).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
 
 
