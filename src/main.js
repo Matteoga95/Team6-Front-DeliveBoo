@@ -23,3 +23,5 @@ library.add(fab, fas, far)
 
 // createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount('#app')
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
+
+
