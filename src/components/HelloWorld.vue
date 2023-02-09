@@ -63,24 +63,10 @@ window.addEventListener("scroll", (e) => {
 
 <template>
 
-    <header class="header">
-        <a href="/" class="logo">Delive<span class="yellow">boo</span></a>
 
-        <nav class="navbar">
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#about">About Us</a>
-            <a href="#contact">Contact Us</a>
-            <a href="" class="btn">Make an Order</a>
-        </nav>
-
-        <!-- Hamburger -->
-        <div class="hamburger">
-            <img src="../assets/img/grid-outline.svg" alt="" />
-        </div>
-    </header>
 
     <!-- Home -->
+    <!-- SE SERVE STA QUA -->
     <section class="home" id="home">
         <div class="content">
             <h1>Order Your Product <span class="yellow">Easier & Faster.</span></h1>
@@ -92,9 +78,11 @@ window.addEventListener("scroll", (e) => {
             <a href="#" class="home-btn">Go to Menu</a>
         </div>
         <div class="image">
-            <img src="../assets/img/Delivery address.svg" alt="" />
+            <img src="./assets/img/Delivery Address.svg" alt="" />
         </div>
     </section>
+
+
 
     <!-- Services -->
     <section class="services" id="services">

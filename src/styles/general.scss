@@ -6,11 +6,11 @@
 :root {
     --black: #1f1f1f;
     --white: #fff;
-    --yellow: #ffc554;
-    --deep-yellow: #ffc727;
-    --bg-yellow: #fffaf1;
-    --btn-yellow: #fff4d4;
-    --footer-yellow: #fff9e9;
+    --main-color: #e29436;
+    --deep-main-color: #ffc727;
+    --bg-main-color: #fffaf1;
+    --btn-main-color: #fff4d4;
+    --footer-main-color: #fff9e9;
     --grey: #737373;
     --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
     --transition: all 0.2s linear;
@@ -53,8 +53,8 @@ section {
     padding: 2rem 9%;
 }
 
-.yellow {
-    color: var(--yellow);
+.main-color {
+    color: var(--main-color);
 }
 
 /* Header */
@@ -79,6 +79,7 @@ section {
 }
 
 .navbar a {
+    font-size: 1.6rem;
     font-weight: 500;
     transition: var(--transition);
     padding: 1rem;
@@ -90,14 +91,14 @@ section {
 }
 
 .navbar a:hover {
-    color: var(--yellow);
-    border-color: var(--yellow);
+    color: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .btn {
     display: inline-block;
-    color: var(--yellow);
-    background-color: var(--btn-yellow);
+    color: var(--main-color);
+    background-color: var(--btn-main-color);
     padding: 1rem;
     border-radius: 0.5rem;
     transition: var(--transition);
@@ -191,7 +192,7 @@ section {
     color: var(--white);
     font-weight: 500;
     border-radius: 0.5rem;
-    background-color: var(--yellow);
+    background-color: var(--main-color);
     padding: 1rem 1.5rem;
     margin-top: 1rem;
     transition: var(--transition);
@@ -231,7 +232,7 @@ section {
 
 /* Services */
 section.services {
-    background-color: var(--bg-yellow);
+    background-color: var(--bg-main-color);
     padding: 5rem 9%;
 }
 
@@ -368,7 +369,7 @@ section.about {
 section.appss {
     margin: 10rem 9%;
     border-radius: 0.5rem;
-    background-color: var(--yellow);
+    background-color: var(--main-color);
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -441,7 +442,7 @@ section.appss .content .links img {
 /* Footer */
 
 .footer .top {
-    background-color: var(--footer-yellow);
+    background-color: var(--footer-main-color);
     padding: 10rem 9%;
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -458,7 +459,7 @@ section.appss .content .links img {
     align-items: center;
     justify-content: center;
     padding: 1.5rem 0;
-    background-color: var(--deep-yellow);
+    background-color: var(--deep-main-color);
 }
 
 .footer .top .content p {
@@ -547,7 +548,7 @@ section.appss .content .links img {
     position: fixed;
     bottom: 10%;
     right: 3%;
-    background-color: var(--deep-yellow);
+    background-color: var(--deep-main-color);
     padding: 0.8rem;
     border-radius: 1rem;
     box-shadow: var(--box-shadow);
