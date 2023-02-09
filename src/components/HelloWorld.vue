@@ -96,7 +96,7 @@ window.addEventListener("scroll", (e) => {
         <div class="content">
             <h1>Order Your Product <span class="yellow">Easier & Faster.</span></h1>
             <p>
-                Delivero is a leading global online food delivery marketplace,
+                Deliveboo is a leading global online food delivery marketplace,
                 connecting consumers and restaurants through its platform in 24
                 countries.
             </p>
