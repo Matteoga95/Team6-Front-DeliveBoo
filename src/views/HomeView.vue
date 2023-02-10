@@ -11,7 +11,7 @@ export default {
     },
 
     mounted() {
-        // this.state.getRestaurants(this.state.baseUrl + 'api/restaurants'),
+        this.state.getRestaurants(this.state.baseUrl + 'api/restaurants')
         this.state.getTipologies(this.state.baseUrl + 'api/tipologies')
     }
 }
@@ -46,9 +46,10 @@ export default {
 
                     </div>
 
-                    <a class="text-tipology position-absolute top-50 start-50 translate-middle text-white">
+                    <router-link :to="{ name: tipology.slug }"
+                        class="text-tipology position-absolute top-50 start-50 translate-middle text-white">
                         {{ tipology.name }}
-                    </a>
+                    </router-link>
                 </div>
             </div>
 
