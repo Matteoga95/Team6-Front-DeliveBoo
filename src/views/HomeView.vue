@@ -1,8 +1,12 @@
 <script>
 import { state } from '../state';
+import TipologiesHome from '../components/TipologiesHome.vue';
 
 export default {
     name: 'HomeView',
+    components: {
+        TipologiesHome
+    },
 
     data() {
         return {
@@ -36,24 +40,8 @@ export default {
             </div>
         </div>
 
-        <div class="tipologies d-flex py-3">
+        <TipologiesHome :tipologies="state.tipologies" />
 
-            <div v-for="tipology in state.tipologies" class="col">
-                <div class="my-card mx-2 text-center position-relative">
-
-                    <img src="https://www.giallozafferano.it/images/233-23307/Pane-di-semola_780x520_wm.jpg" alt="">
-                    <div class="position-absolute my-shadow">
-
-                    </div>
-
-                    <router-link :to="{ name: tipology.slug }"
-                        class="text-tipology position-absolute top-50 start-50 translate-middle text-white">
-                        {{ tipology.name }}
-                    </router-link>
-                </div>
-            </div>
-
-        </div>
     </section>
 </template>
 

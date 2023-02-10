@@ -4,14 +4,14 @@ import HomeView from './views/HomeView.vue';
 import RestaurantView from './views/RestaurantView.vue';
 import NotFoundView from './views/NotFoundView.vue';
 import SuccessView from './views/SuccessView.vue';
-import StreetView from './views/StreetView.vue';
-import ItalianaView from './views/ItalianaView.vue';
-import CineseView from './views/CineseView.vue';
-import MessicanaView from './views/MessicanaView.vue';
-import VeganaView from './views/VeganaView.vue';
-import GiapponeseView from './views/GiapponeseView.vue';
-import CeliacaView from './views/CeliacaView.vue';
-import IndianaView from './views/IndianaView.vue';
+import StreetView from './views/Tipologies/StreetView.vue';
+import ItalianaView from './views/Tipologies/ItalianaView.vue';
+import CineseView from './views/Tipologies/CineseView.vue';
+import MessicanaView from './views/Tipologies/MessicanaView.vue';
+import VeganaView from './views/Tipologies/VeganaView.vue';
+import GiapponeseView from './views/Tipologies/GiapponeseView.vue';
+import CeliacaView from './views/Tipologies/CeliacaView.vue';
+import IndianaView from './views/Tipologies/IndianaView.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -22,49 +22,49 @@ const router = createRouter({
             component: HomeView
         },
         {
-            path: '/',
+            path: '/restaurant/:slug',
+            name: 'restaurant',
+            component: RestaurantView
+        },
+        {
+            path: '/street',
             name: 'streetfood',
             component: StreetView
         },
         {
-            path: '/',
+            path: '/messicana',
             name: 'messicana',
             component: MessicanaView
         },
         {
-            path: '/',
+            path: '/celiaca',
             name: 'celiaca',
             component: CeliacaView
         },
         {
-            path: '/',
+            path: '/indiana',
             name: 'indiana',
             component: IndianaView
         },
         {
-            path: '/',
+            path: '/giapponese',
             name: 'giapponese',
             component: GiapponeseView
         },
         {
-            path: '/',
+            path: '/vegana',
             name: 'vegana',
             component: VeganaView
         },
         {
-            path: '/',
+            path: '/cinese',
             name: 'cinese',
             component: CineseView
         },
         {
-            path: '/',
+            path: '/italiana',
             name: 'italiana',
             component: ItalianaView
-        },
-        {
-            path: '/restaurant/:slug',
-            name: 'restaurant',
-            component: RestaurantView
         },
         {
             path: '/success',
