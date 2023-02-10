@@ -21,7 +21,7 @@ export const state = reactive({
             .then(response => {
                 this.loading = true
                 this.restaurants = response.data.data.data;
-                // console.log(response.data.data.data);
+                console.log(response.data.data.data);
                 this.loading = false
             })
             .catch(error => {
