@@ -4,8 +4,10 @@ import axios from 'axios'
 
 export const state = reactive({
     baseUrl: 'http://127.0.0.1:8000/',
-    projects: {},
+    restaurants: [],
+    tipologies: [],
     loading: true,
+    loadingTipologies: true,
     name: '',
     email: '',
     message: '',
@@ -13,14 +15,27 @@ export const state = reactive({
     loading: false,
     errors: {},
 
-    getProjects(url) {
+    getRestaurants(url) {
         axios
             .get(url)
             .then(response => {
                 this.loading = true
-                this.projects = response.data.results;
-                console.log(this.projects);
+                this.restaurants = response.data.data.data;
+                // console.log(response.data.data.data);
                 this.loading = false
+            })
+            .catch(error => {
+                console.error(error.message);
+            })
+    },
+    getTipologies(url) {
+        axios
+            .get(url)
+            .then(response => {
+                this.loadingTipologies = true
+                this.tipologies = response.data.data;
+                console.log(response.data.data);
+                this.loadingTipologies = false
             })
             .catch(error => {
                 console.error(error.message);
@@ -28,7 +43,7 @@ export const state = reactive({
     },
     /**
      * 
-     * @param {string} url url of image calls by API (getProjects method)
+     * @param {string} url url of image calls by API (getr method)
      */
     imagePath(url) {
         if (url && !url.startsWith('https')) {
@@ -41,7 +56,7 @@ export const state = reactive({
     },
     // pagination
     changePage(url) {
-        this.getProjects(url)
+        this.getRestaurants(url)
     },
     //send email
     sendForm() {
