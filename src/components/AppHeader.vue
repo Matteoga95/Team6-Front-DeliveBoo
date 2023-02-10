@@ -12,7 +12,7 @@ export default {
         <nav class="navbar">
             <a href="#home">Home</a>
             <a href="#">Restaurants</a>
-            <a href="http://127.0.0.1:8000/login" class="btn">Login</a>
+            <a href="http://127.0.0.1:8000/login" class="my-btn">Login</a>
         </nav>
 
 
