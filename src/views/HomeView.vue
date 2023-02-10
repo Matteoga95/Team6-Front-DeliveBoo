@@ -1,23 +1,57 @@
 <script>
+import { state } from '../state';
+
 export default {
-    name: 'HomeView'
+    name: 'HomeView',
+
+    data() {
+        return {
+            state
+        }
+    },
+
+    mounted() {
+        // this.state.getRestaurants(this.state.baseUrl + 'api/restaurants'),
+        this.state.getTipologies(this.state.baseUrl + 'api/tipologies')
+    }
 }
 </script>
 
 <template>
     <!-- Home -->
-    <!-- SE SERVE STA QUA -->
     <section class="home" id="home">
         <div class="content">
-            <h1>Order Your Food Takeaway <span class="main-color">and many more</span></h1>
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi eligendi alias nemo, eum fugiat
-                provident consequuntur velit laudantium fuga hic reprehenderit voluptatum placeat repellat deserunt.
-            </p>
-            <a href="#" class="home-btn">Go to Restaurants</a>
+            <div class="d-flex align-items-center">
+                <div class="col-6 px-5">
+                    <h1>Order Your Food Takeaway <span class="main-color">and many more</span></h1>
+                    <p>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi eligendi alias nemo, eum fugiat
+                        provident consequuntur velit laudantium fuga hic reprehenderit voluptatum placeat repellat
+                        deserunt.
+                    </p>
+                </div>
+                <div class="image col-6 px-5">
+                    <img src="../assets/img/Delivery Address.svg" alt="" />
+                </div>
+            </div>
         </div>
-        <div class="image">
-            <img src="../assets/img/Delivery Address.svg" alt="" />
+
+        <div class="tipologies d-flex py-3">
+
+            <div v-for="tipology in state.tipologies" class="col">
+                <div class="my-card mx-2 text-center position-relative">
+
+                    <img src="https://www.giallozafferano.it/images/233-23307/Pane-di-semola_780x520_wm.jpg" alt="">
+                    <div class="position-absolute my-shadow">
+
+                    </div>
+
+                    <a class="text-tipology position-absolute top-50 start-50 translate-middle text-white">
+                        {{ tipology.name }}
+                    </a>
+                </div>
+            </div>
+
         </div>
     </section>
 </template>
@@ -25,4 +59,26 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/general.scss';
+
+.my-card {
+    box-shadow: 0 0 6px 0px rgb(192, 192, 192);
+    border-radius: 5px;
+
+    &:hover .my-shadow {
+        background-color: rgba(0, 0, 0, 0.563);
+        cursor: pointer;
+    }
+
+    img {
+        border-radius: 5px;
+    }
+
+    .my-shadow {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.432);
+        top: 0;
+
+    }
+}
 </style>
