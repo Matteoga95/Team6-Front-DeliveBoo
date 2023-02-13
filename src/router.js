@@ -4,7 +4,6 @@ import HomeView from './views/HomeView.vue';
 import RestaurantView from './views/RestaurantView.vue';
 import NotFoundView from './views/NotFoundView.vue';
 import SuccessView from './views/SuccessView.vue';
-import CeliacaView from './views/Tipologies/CeliacaView.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -18,11 +17,6 @@ const router = createRouter({
             path: '/restaurant/:slug',
             name: 'restaurant',
             component: RestaurantView
-        },
-        {
-            path: '/celiaca',
-            name: 'celiaca',
-            component: CeliacaView
         },
         {
             path: '/success',
