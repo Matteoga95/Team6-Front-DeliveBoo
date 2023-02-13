@@ -34,7 +34,7 @@ export const state = reactive({
             .then(response => {
                 this.loadingTipologies = true
                 this.tipologies = response.data.data;
-                console.log(response.data.data);
+                // console.log(response.data.data);
                 this.loadingTipologies = false
             })
             .catch(error => {
