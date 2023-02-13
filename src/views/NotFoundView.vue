@@ -6,10 +6,10 @@ export default {
 
 <template>
     <div class="container">
-        <p class="lead">
+        <h1 class="lead">
             😨 Ops, Page not found!
-        </p>
-        <router-link to="/home">Go to Homepage</router-link>
+        </h1>
+        <router-link :to="{ name: 'home' }">Go to Homepage</router-link>
 
     </div>
 </template>

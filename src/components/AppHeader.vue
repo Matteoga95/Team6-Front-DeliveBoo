@@ -10,8 +10,7 @@ export default {
             <img src="../assets/img/logo-deliveboo.png" alt="">
         </div>
         <nav class="navbar">
-            <a href="#home">Home</a>
-            <a href="#">Restaurants</a>
+            <router-link :to="{ name: 'home' }" href="#home">Home</router-link>
             <a href="http://127.0.0.1:8000/login" class="my-btn">Login</a>
         </nav>
 
