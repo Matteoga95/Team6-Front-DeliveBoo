@@ -1,12 +1,12 @@
 <script>
 import { state } from '../../state.js'
 import RestaurantTipology from '../../components/RestaurantTipology.vue'
-import TipologiesHome from '../../components/TipologiesHome.vue';
+import SearchHome from '../../components/SearchHome.vue';
 
 
 export default {
     name: "CeliacaView",
-    components: { RestaurantTipology, TipologiesHome },
+    components: { RestaurantTipology, SearchHome },
     data() {
         return {
             state
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-    <TipologiesHome :tipologies="state.tipologies" />
+    <SearchHome :tipologies="state.tipologies" />
 
     <RestaurantTipology :restaurants="state.restaurants" />
 </template>

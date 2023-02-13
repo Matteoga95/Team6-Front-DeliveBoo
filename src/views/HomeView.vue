@@ -1,11 +1,11 @@
 <script>
 import { state } from '../state';
-import TipologiesHome from '../components/TipologiesHome.vue';
+import SearchHome from '../components/SearchHome.vue';
 
 export default {
     name: 'HomeView',
     components: {
-        TipologiesHome
+        SearchHome
     },
 
     data() {
@@ -40,7 +40,7 @@ export default {
             </div>
         </div>
 
-        <TipologiesHome :tipologies="state.tipologies" />
+        <SearchHome :tipologies="state.tipologies" :restaurants="state.restaurants" />
 
     </section>
 </template>
