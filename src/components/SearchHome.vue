@@ -1,4 +1,5 @@
 <script>
+import { state } from '../state';
 
 export default {
     name: 'SearchHome',
@@ -8,6 +9,7 @@ export default {
     },
     data() {
         return {
+            state,
             selectedTipes: [],
             filteredRestaurants: []
         }
@@ -47,19 +49,7 @@ export default {
 </script>
         
 <template>
-    <div class="tipologies d-flex py-3 justify-content-center">
-
-        <!-- <div> -->
-        <!-- <label class="typo__label">Simple select / dropdown</label>
-            <multiselect v-model="selectedTipes" :options="tipologies" :multiple="true" :close-on-select="false"
-                :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name"
-                :preselect-first="true">
-                <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single"
-                        v-if="selectedTipes.length" v-show="!isOpen">{{ selectedTipes.length }} options
-                        selected</span></template>
-            </multiselect>
-            <pre class="language-json"><code>{{ selectedTipes }}</code></pre>
-        </div> -->
+    <div class="tipologies d-flex py-3 justify-content-center" :class="filteredRestaurants.length > 0 ? '' : ''">
 
         <div class="mb-4 row ">
             <div class="col-md-4 col-form-label">
@@ -81,8 +71,7 @@ export default {
         <div class="">
             <div v-for="restaurant in filteredRestaurants">
                 <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }" class="my-card d-flex">
-                    <img width="200"
-                        src=http://127.0.0.1:8000/storage/uploads/6VmtRVOEmkD4eQ0TataHsGOOpwM3U2T8POoxbZbV.jpg alt="">
+                    <img width="200" :src="state.imagePath(restaurant.cover_image)" alt="">
                     <div class="col">
                         <div class="details p-3">
                             <h1>{{ restaurant.name }}</h1>
@@ -97,20 +86,6 @@ export default {
         </div>
     </div>
 
-
-    <!-- <div class="col" v-for="tipology in tipologies">
-            <div class="my-card mx-2 text-center position-relative">
-
-                <img src="https://www.giallozafferano.it/images/233-23307/Pane-di-semola_780x520_wm.jpg" alt="">
-                <div class="position-absolute my-shadow">
-
-                </div>
-
-                <div class="text-tipology position-absolute top-50 start-50 translate-middle text-white">
-                    {{ tipology.name }}
-                </div>
-            </div>
-        </div> -->
 </template>
 
 <style lang="scss" scoped>
@@ -118,11 +93,17 @@ export default {
     padding: 0;
     margin-bottom: 1rem;
     border-radius: 5px;
+    text-decoration: none;
+
+    &:hover {
+        color: black;
+        box-shadow: 0 0px 1px 2px #e29436;
+    }
 
     img {
         object-fit: cover;
         border-radius: 5px 0 0 5px;
-        height: 100%;
+        height: 14rem;
     }
 
     .details {
@@ -134,10 +115,12 @@ export default {
     .type {
         color: #cf4835;
     }
+
 }
 
 
 select {
+    width: 300px;
     padding: 8px 16px;
     height: 270px;
     overflow: auto;
