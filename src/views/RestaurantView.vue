@@ -134,9 +134,9 @@ export default {
                             <h2 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h2>
                         </div>
                         <div class="align-self-center text-end">
-                            <p>Aggiungi al carrello</p>
-                            <button @click="addDishToCart(dish)" class="btn py-2 px-3 mx-4 btn-primary ">
-                                <font-awesome-icon icon="fa-solid fa-plus" />
+                            <button @click="addDishToCart(dish)"
+                                class="btn py-2 px-3 mx-4 btn-primary d-flex align-items-center">
+                                Add to cart <font-awesome-icon icon="fa-solid fa-plus" class="ms-3" />
                             </button>
                         </div>
 
