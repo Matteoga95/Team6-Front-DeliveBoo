@@ -1,6 +1,6 @@
 <script>
 import { state } from '../state';
-
+import axios from 'axios'
 
 export default {
     name: 'RestaurantView',
@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             state,
+            loading: true,
             restaurant: [],
             has_dishes: true,
             //oggetti del carrello
@@ -23,54 +24,57 @@ export default {
             this.state.cart_counter = this.cart.length
             localStorage.setItem("cart", JSON.stringify(this.cart))
         },
-        callRestaurant() {
+        getSingleRestaurant(url) {
+            console.log(url);
+            axios
+                .get(url)
+                .then(response => {
 
-            this.state.getSingleRestaurant(this.state.baseUrl + 'api/restaurants/' + this.slug)
 
-            if (this.state.single_restaurant.name) {
-                this.restaurant = this.state.single_restaurant
-            }
-            console.log(this.restaurant);
+                    this.loading = true
+                    this.restaurant = response.data.data;
+                    this.getHasDishes()
+                    console.log(this.restaurant);
+                    this.loading = false
+                })
+                .catch(error => {
+                    console.error(error.message);
+                })
+                .finally(function () {
 
+                })
         },
-        processLoad() {
-            if (this.state.single_restaurant.name) {
-                this.restaurant = this.state.single_restaurant
+        getHasDishes() {
+
+            //determino se ha piatti o meno
+            if (!this.restaurant) {
+                this.has_dishes = false
             }
-        },
+            if (!this.restaurant.dishes) {
+                this.has_dishes = false
+            } else {
+                if (!this.restaurant.dishes.length) {
+                    this.has_dishes = false
+                }
+            }
 
+            //inizializzo il carrello nel local storage
+            if (this.has_dishes) {
 
+                localStorage.setItem('dishes', JSON.stringify(this.restaurant.dishes))
+                if (!localStorage.getItem("cart")) {
+                    localStorage.setItem("cart", "[]")
+                    this.state.cart_counter = this.cart.length
+                }
+            }
+        }
 
     },
     mounted() {
-        //metodo da lanciare quando viene ricaricata la pagina
-        window.addEventListener("load", () => this.processLoad());
 
-        this.callRestaurant()
+        this.getSingleRestaurant(this.state.baseUrl + 'api/restaurants/' + this.slug)
 
-        //determino se ha piatti o meno
-        if (!this.restaurant) {
-            this.has_dishes = false
-        }
-        if (!this.restaurant.dishes) {
-            this.has_dishes = false
-        } else {
-            if (!this.restaurant.dishes.length) {
-                this.has_dishes = false
-            }
-        }
 
-        //inizializzo il carrello nel local storage
-        if (this.has_dishes) {
-
-            localStorage.setItem('dishes', JSON.stringify(this.restaurant.dishes))
-            if (!localStorage.getItem("cart")) {
-                localStorage.setItem("cart", "[]")
-                this.state.cart_counter = this.cart.length
-            }
-        }
-
-        // console.log(this.has_dishes);
     }
 }
 </script>

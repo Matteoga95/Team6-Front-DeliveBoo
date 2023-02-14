@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 export const state = reactive({
-    baseUrl: 'http://127.0.0.1:8000/',
+    baseUrl: 'http://127.0.0.1:8001/',
     restaurants: [],
     tipologies: [],
     single_restaurant: [],
@@ -46,24 +46,6 @@ export const state = reactive({
             .catch(error => {
                 console.error(error.message);
             })
-    },
-    getSingleRestaurant(url) {
-        console.log(url);
-        axios
-            .get(url)
-            .then(response => {
-
-
-                this.loading = true
-                this.single_restaurant = response.data.data;
-                console.log(this.single_restaurant);
-                this.loading = false
-            })
-            .catch(error => {
-                console.error(error.message);
-            })
-
-
     },
     /**
      * 
