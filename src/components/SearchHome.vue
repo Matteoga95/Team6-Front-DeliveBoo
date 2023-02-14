@@ -9,20 +9,34 @@ export default {
     // },
     data() {
         return {
-            state
+            state,
+            total_rest: []
             // selectedTipes: [],
             // filteredRestaurants: []
         }
     },
+    methods: {
+        // clearTypes() {
+        //     this.state.filteredRestaurants = this.state.restaurants;
+        //     document.getElementById("types_select").selectedIndex = -1
+        //     //ordino i ristoranti
+        //     this.state.filteredRestaurants.sort
+
+
+        // }
+    },
     mounted() {
         this.state.filterRestaurants()
-
+        this.total_rest = this.state.restaurants
         //azzero il carrello local storage
         localStorage.setItem("cart", "[]")
     }
 
 
 }
+
+
+
 </script>
         
 <template>
@@ -31,7 +45,8 @@ export default {
         <div class="mb-4 px-5  ">
 
             <div class="col-md-6">
-                <select v-model="state.selectedTipes" class="dropdown" multiple>
+                <select id="types_select" v-model="state.selectedTipes" class="dropdown" multiple>
+
                     <option :title="tipology.name" v-for="tipology in state.tipologies">{{
                         tipology.name
                     }}</option>
@@ -39,8 +54,9 @@ export default {
                 </select>
             </div>
             <div class="">
-                <label for="tipologies" class="px-5">Filter </label>
-                <button class="my-btn my-3" @click="state.filterRestaurants()">Search</button>
+
+                <button class="my-btn my-3 mx-3" @click="state.filterRestaurants()">Filter</button>
+                <!-- <button class="my-btn my-3 mx-3" @click="clearTypes()">Clear</button> -->
 
             </div>
         </div>

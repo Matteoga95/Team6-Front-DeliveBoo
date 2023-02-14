@@ -119,6 +119,10 @@ export const state = reactive({
         // console.log(this.selectedTipes);
         // console.log(this.filteredRestaurants);
 
+
+        //ordino i ristoranti
+        this.filteredRestaurants.sort
+
     },
     addDishToCart(dish) {
         this.cart.push()
