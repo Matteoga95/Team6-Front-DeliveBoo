@@ -43,6 +43,10 @@ export default {
     <div class="tipologies d-flex py-3  " :class="state.filteredRestaurants.length > 0 ? '' : ''">
 
         <div class="mb-4 px-5  ">
+            <div class="d-flex align-items-center mb-3">
+                <h3 class="col-6 me-5">Choose one or more tipologies!</h3>
+                <button class="my-btn my-3 mx-3" @click="state.filterRestaurants()">Filter</button>
+            </div>
 
             <div class="col-md-6">
                 <select id="types_select" v-model="state.selectedTipes" class="dropdown" multiple>
@@ -55,7 +59,7 @@ export default {
             </div>
             <div class="">
 
-                <button class="my-btn my-3 mx-3" @click="state.filterRestaurants()">Filter</button>
+
                 <!-- <button class="my-btn my-3 mx-3" @click="clearTypes()">Clear</button> -->
 
             </div>
@@ -63,20 +67,24 @@ export default {
 
 
         <div class="flex-fill ">
-            <div v-for="restaurant in state.filteredRestaurants">
-
-                <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }" class="my-card d-flex">
-                    <img width="200" :src="state.imagePath(restaurant.cover_image)" alt="">
-                    <div class="col">
-                        <div class="details p-3">
-                            <h1>{{ restaurant.name }}</h1>
-                            <span class="type" v-for="tipology in restaurant.tipologies">
-                                {{ tipology.name + ' ' }}
-                            </span>
-                            <div>{{ restaurant.address }}</div>
-                        </div>
+            <div class="container-fluid">
+                <div class="row row-cols-2">
+                    <div v-for="restaurant in state.filteredRestaurants">
+                        <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"
+                            class="my-card d-flex">
+                            <img width="200" :src="state.imagePath(restaurant.cover_image)" alt="">
+                            <div class="col">
+                                <div class="details p-3">
+                                    <h1>{{ restaurant.name }}</h1>
+                                    <span class="type" v-for="tipology in restaurant.tipologies">
+                                        {{ tipology.name + ' ' }}
+                                    </span>
+                                    <div>{{ restaurant.address }}</div>
+                                </div>
+                            </div>
+                        </router-link>
                     </div>
-                </router-link>
+                </div>
             </div>
         </div>
     </div>
@@ -102,7 +110,7 @@ export default {
     }
 
     .details {
-        background-color: gainsboro;
+        background-color: rgb(239, 239, 239);
         border-radius: 0 5px 5px 0;
         height: 100%;
     }
