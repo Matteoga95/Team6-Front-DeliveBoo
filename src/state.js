@@ -100,15 +100,23 @@ export const state = reactive({
         // console.log(this.restaurants)
         if (this.selectedTipes.length > 0) {
 
-            for (let i = 0; i < this.selectedTipes.length; i++) {
-                // console.log(this.selectedTipes[i])
-                for (let l = 0; l < this.restaurants.length; l++) {
+            for (let l = 0; l < this.restaurants.length; l++) {
+                let count = 0
+                for (let i = 0; i < this.selectedTipes.length; i++) {
+                    // console.log(this.selectedTipes[i])
                     // console.log(this.restaurants[l].tipologies[0].name)
                     let prova = this.restaurants[l].tipologies.find(tipi => tipi.name === this.selectedTipes[i])
                     // console.log(prova);
                     if (prova) {
-                        if (!this.filteredRestaurants.includes(this.restaurants[l])) {
-                            this.filteredRestaurants.push(this.restaurants[l])
+                        count++
+                        // console.log(this.restaurants[l]);
+                        // console.log(count);
+                        if (count >= this.selectedTipes.length) {
+                            if (!this.filteredRestaurants.includes(this.restaurants[l])) {
+                                // console.log(count);
+                                this.filteredRestaurants.push(this.restaurants[l])
+
+                            }
                         }
                     }
                 }
