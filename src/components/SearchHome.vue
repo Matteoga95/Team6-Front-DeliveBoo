@@ -3,73 +3,52 @@ import { state } from '../state';
 
 export default {
     name: 'SearchHome',
-    props: {
-        tipologies: Array,
-        restaurants: Array
-    },
+    // props: {
+    //     tipologies: Array,
+    //     restaurants: Array
+    // },
     data() {
         return {
-            state,
-            selectedTipes: [],
-            filteredRestaurants: []
-        }
-    },
-    methods: {
-        filterRestaurants() {
-            this.filteredRestaurants = []
-            // console.log(this.restaurants)
-            if (this.selectedTipes.length > 0) {
-
-                for (let i = 0; i < this.selectedTipes.length; i++) {
-                    // console.log(this.selectedTipes[i])
-                    for (let l = 0; l < this.restaurants.length; l++) {
-                        // console.log(this.restaurants[l].tipologies[0].name)
-                        let prova = this.restaurants[l].tipologies.find(tipi => tipi.name === this.selectedTipes[i])
-                        // console.log(prova);
-                        if (prova) {
-                            if (!this.filteredRestaurants.includes(this.restaurants[l])) {
-                                this.filteredRestaurants.push(this.restaurants[l])
-                            }
-                        }
-                    }
-                }
-            } else {
-                this.filteredRestaurants = this.restaurants
-            }
-            console.log(this.selectedTipes);
-            console.log(this.filteredRestaurants);
-
+            state
+            // selectedTipes: [],
+            // filteredRestaurants: []
         }
     },
     mounted() {
-        // console.log(this.selectedTipes)
+        this.state.filterRestaurants()
+
+        //azzero il carrello local storage
+        localStorage.setItem("cart", "[]")
     }
+
 
 }
 </script>
         
 <template>
-    <div class="tipologies d-flex py-3 justify-content-center" :class="filteredRestaurants.length > 0 ? '' : ''">
+    <div class="tipologies d-flex py-3  " :class="state.filteredRestaurants.length > 0 ? '' : ''">
 
-        <div class="mb-4 row ">
-            <div class="col-md-4 col-form-label">
-                <label for="tipologies" class=" text-md-right">Filter the tipology</label>
-                <button class="my-btn my-3" @click="filterRestaurants()">Search</button>
+        <div class="mb-4 px-5  ">
 
-            </div>
             <div class="col-md-6">
-                <select v-model="selectedTipes" class="dropdown" multiple>
-                    <option :title="tipology.name" v-for="tipology in tipologies">{{
+                <select v-model="state.selectedTipes" class="dropdown" multiple>
+                    <option :title="tipology.name" v-for="tipology in state.tipologies">{{
                         tipology.name
                     }}</option>
 
                 </select>
             </div>
+            <div class="">
+                <label for="tipologies" class="px-5">Filter </label>
+                <button class="my-btn my-3" @click="state.filterRestaurants()">Search</button>
+
+            </div>
         </div>
 
 
-        <div class="">
-            <div v-for="restaurant in filteredRestaurants">
+        <div class="flex-fill ">
+            <div v-for="restaurant in state.filteredRestaurants">
+
                 <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }" class="my-card d-flex">
                     <img width="200" :src="state.imagePath(restaurant.cover_image)" alt="">
                     <div class="col">

@@ -1,7 +1,16 @@
 <script>
+import { state } from '../state';
+
 export default {
-    name: 'AppHeader'
+    name: 'AppHeader',
+    data() {
+        return {
+            state
+        }
+    },
 }
+
+
 </script>
 
 <template>
@@ -10,9 +19,11 @@ export default {
             <img src="../assets/img/logo-deliveboo.png" alt="">
         </div>
         <nav class="navbar">
-            <a href="#home">Home</a>
+            <a href="#">Home</a>
             <a href="#">Restaurants</a>
             <a href="http://127.0.0.1:8000/login" class="my-btn">Login</a>
+            <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+            <span class='badge badge-warning' id='lblCartCount'>{{ state.cart_counter }}</span>
         </nav>
 
 
@@ -25,6 +36,30 @@ export default {
 
 
 <style lang="scss" scoped>
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    font-size: large;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+    background-color: #c67605;
+}
+
+#lblCartCount {
+    font-size: 12px;
+    background: #cf4835;
+    color: #fff;
+    padding: 0px 5px;
+    vertical-align: top;
+    margin-left: -5px;
+    margin-top: -10px;
+}
+
 .logo img {
     width: 50%;
 }

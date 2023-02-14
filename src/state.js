@@ -6,6 +6,9 @@ export const state = reactive({
     baseUrl: 'http://127.0.0.1:8000/',
     restaurants: [],
     tipologies: [],
+    single_restaurant: [],
+    selectedTipes: [],
+    filteredRestaurants: [],
     loading: true,
     loadingTipologies: true,
     name: '',
@@ -14,6 +17,8 @@ export const state = reactive({
     success: false,
     loading: false,
     errors: {},
+    cart_counter: 0,
+
 
     getRestaurants(url) {
         axios
@@ -21,6 +26,7 @@ export const state = reactive({
             .then(response => {
                 this.loading = true
                 this.restaurants = response.data.data.data;
+                this.filteredRestaurants = this.restaurants;
                 console.log(response.data.data.data);
                 this.loading = false
             })
@@ -40,6 +46,24 @@ export const state = reactive({
             .catch(error => {
                 console.error(error.message);
             })
+    },
+    getSingleRestaurant(url) {
+        console.log(url);
+        axios
+            .get(url)
+            .then(response => {
+
+
+                this.loading = true
+                this.single_restaurant = response.data.data;
+                console.log(this.single_restaurant);
+                this.loading = false
+            })
+            .catch(error => {
+                console.error(error.message);
+            })
+
+
     },
     /**
      * 
@@ -87,5 +111,35 @@ export const state = reactive({
 
                 state.loading = false
             }))
+    },
+    //filtra ristoranti dinamicamente
+    filterRestaurants() {
+        this.filteredRestaurants = []
+        // console.log(this.restaurants)
+        if (this.selectedTipes.length > 0) {
+
+            for (let i = 0; i < this.selectedTipes.length; i++) {
+                // console.log(this.selectedTipes[i])
+                for (let l = 0; l < this.restaurants.length; l++) {
+                    // console.log(this.restaurants[l].tipologies[0].name)
+                    let prova = this.restaurants[l].tipologies.find(tipi => tipi.name === this.selectedTipes[i])
+                    // console.log(prova);
+                    if (prova) {
+                        if (!this.filteredRestaurants.includes(this.restaurants[l])) {
+                            this.filteredRestaurants.push(this.restaurants[l])
+                        }
+                    }
+                }
+            }
+        } else {
+            this.filteredRestaurants = this.restaurants
+        }
+        // console.log(this.selectedTipes);
+        // console.log(this.filteredRestaurants);
+
+    },
+    addDishToCart(dish) {
+        this.cart.push()
     }
+
 })

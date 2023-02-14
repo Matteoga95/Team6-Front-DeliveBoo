@@ -16,7 +16,8 @@ const router = createRouter({
         {
             path: '/restaurant/:slug',
             name: 'restaurant',
-            component: RestaurantView
+            component: RestaurantView,
+            props: true
         },
         {
             path: '/success',
