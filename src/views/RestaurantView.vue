@@ -67,9 +67,14 @@ export default {
                     this.state.cart_counter = this.cart.length
                 }
             }
+        },
+        getBack() {
+            this.state.cart_counter = 0
+            this.$router.go(-1)
         }
 
     },
+
     mounted() {
 
         this.getSingleRestaurant(this.state.baseUrl + 'api/restaurants/' + this.slug)
@@ -81,9 +86,9 @@ export default {
 
 <template>
     <section class="">
-        <a @click="$router.go(-1)">back</a>
+        <a @click="getBack()">back</a>
         <div class="container ">
-            <!-- banner con la foto del ristorante -->.
+            <!-- banner con la foto del ristorante -->
             <div class="d-flex justify-content-center">
                 <img class="mb-4 cover" src="https://www.travel365.it/foto/altitude-at-shangri-la.jpg" alt="">
             </div>
