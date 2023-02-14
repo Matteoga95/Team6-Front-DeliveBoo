@@ -42,10 +42,10 @@ export default {
 <template>
     <div class="tipologies d-flex py-3  " :class="state.filteredRestaurants.length > 0 ? '' : ''">
 
-        <div class="mb-4 px-5  ">
+        <div class="mb-4 px-5 sidebar_tips">
             <div class="d-flex align-items-center mb-3">
                 <h3 class="col-6 me-5">Choose one or more tipologies!</h3>
-                <button class="my-btn my-3 mx-3" @click="state.filterRestaurants()">Filter</button>
+                <a href="#arrow_down" class="my-btn my-3 mx-3" @click="state.filterRestaurants()">Filter</a>
             </div>
 
             <div class="col-md-6">
@@ -74,12 +74,14 @@ export default {
                             class="my-card d-flex">
                             <img width="200" :src="state.imagePath(restaurant.cover_image)" alt="">
                             <div class="col">
-                                <div class="details p-3">
+                                <div class="details p-3 d-flex flex-column justify-content-evenly">
                                     <h1>{{ restaurant.name }}</h1>
-                                    <span class="type" v-for="tipology in restaurant.tipologies">
-                                        {{ tipology.name + ' ' }}
-                                    </span>
-                                    <div>{{ restaurant.address }}</div>
+                                    <div class="d-flex">
+                                        <div class="type pe-2" v-for="tipology in restaurant.tipologies">
+                                            {{ tipology.name }}
+                                        </div>
+                                    </div>
+                                    <div class="address">{{ restaurant.address }}</div>
                                 </div>
                             </div>
                         </router-link>
@@ -92,6 +94,12 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.tipologies {
+    .sidebar_tips {
+        height: 900px;
+    }
+}
+
 .my-card {
     padding: 0;
     margin-bottom: 1rem;
@@ -113,6 +121,10 @@ export default {
         background-color: rgb(239, 239, 239);
         border-radius: 0 5px 5px 0;
         height: 100%;
+
+        .address {
+            max-width: 100%;
+        }
     }
 
     .type {

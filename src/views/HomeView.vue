@@ -46,8 +46,8 @@ export default {
             </div>
         </div>
 
-        <span id="arrow_down"></span>
 
+        <span id="arrow_down"></span>
         <SearchHome :tipologies="state.tipologies" :restaurants="state.restaurants" />
 
     </section>
