@@ -2,6 +2,13 @@
 import { state } from '../state';
 import axios from 'axios'
 
+var modal = document.getElementById("myModal");
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 export default {
     name: 'RestaurantView',
     props: ['slug'],
@@ -11,6 +18,7 @@ export default {
             loading: true,
             restaurant: [],
             has_dishes: true,
+            new_dish_cart: [],
             //oggetti del carrello
             cart_dishes: JSON.parse(localStorage.getItem("dishes")),
             cart: JSON.parse(localStorage.getItem("cart")),
@@ -19,11 +27,33 @@ export default {
     },
     methods: {
         addDishToCart(data) {
-            // console.log(this.cart);
-            this.cart.push(data)
+            //valorizzo il piatto nel return che si vuole aggiungere
+            this.new_dish_cart = data
 
-            this.state.cart_counter = this.cart.length
-            localStorage.setItem("cart", JSON.stringify(this.cart))
+            //se nel carrello c'è qualcosa ed è di un ristorante non quest faccio il controllo con la modale
+            console.log(this.cart.length);
+            if (this.cart.length > 0) {
+                if (this.cart[0].restaurant_id != data.restaurant_id) {
+                    //apro la modale
+                    var modal = document.getElementById("myModal");
+                    modal.style.display = "block";
+                } else {
+                    // console.log(this.cart);
+                    this.cart.push(data)
+
+                    this.state.cart_counter = this.cart.length
+                    localStorage.setItem("cart", JSON.stringify(this.cart))
+
+                }
+
+            } else {
+                console.log(this.cart);
+                this.cart.push(data)
+
+                this.state.cart_counter = this.cart.length
+                localStorage.setItem("cart", JSON.stringify(this.cart))
+
+            }
         },
         removeDishToCart(data) {
             // console.log(this.cart);
@@ -60,6 +90,31 @@ export default {
 
                 })
         },
+        cancelModal() {
+            //in questo caso tolgo la modale e non ci metto il piatto che si voleva aggiungere
+
+            this.new_dish_cart = []
+            this.state.cart_counter = this.cart.length
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+
+
+        },
+        acceptModal() {
+            //in questo caso tolgo la modale e cancello il carrello e ci metto il piatto che si voleva aggiungere
+
+            this.cart = []
+            this.cart.push(this.new_dish_cart)
+
+            this.state.cart_counter = this.cart.length
+            localStorage.setItem("cart", JSON.stringify(this.cart))
+
+
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+
+
+        },
         getHasDishes() {
 
             //determino se ha piatti o meno
@@ -86,7 +141,7 @@ export default {
             }
         },
         getBack() {
-            this.state.cart_counter = 0
+
             this.$router.go(-1)
         }
 
@@ -105,6 +160,25 @@ export default {
     <section class="">
         <a @click="getBack()">back</a>
         <div class="container ">
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content text-center">
+
+                    <h3>You can only order from one restaurant</h3>
+                    <p>ok to continue or cancel to go back</p>
+                    <div class="d-flex justify-content-center">
+                        <button class=" m-3 btn btn-primary " @click="acceptModal()">Ok</button>
+                        <button type="button" class=" m-3 btn btn-danger" @click="cancelModal()">Cancel</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+
             <!-- banner con la foto del ristorante -->
             <div class="d-flex justify-content-center">
                 <img class="mb-4 cover" src="https://www.travel365.it/foto/altitude-at-shangri-la.jpg" alt="">
@@ -195,6 +269,38 @@ export default {
 
 }
 
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
 .cover {
     max-height: 300px;
     width: 100%;
@@ -211,6 +317,12 @@ export default {
         ;
     }
 
+    font-size: large;
+}
+
+.btn-danger {
+
+    transition: 0.5s;
     font-size: large;
 }
 

@@ -29,7 +29,7 @@ export default {
         this.state.filterRestaurants()
         this.total_rest = this.state.restaurants
         //azzero il carrello local storage
-        localStorage.setItem("cart", "[]")
+        // localStorage.setItem("cart", "[]")
     }
 
 
