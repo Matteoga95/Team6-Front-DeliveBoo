@@ -82,6 +82,7 @@ export default {
                     this.getHasDishes()
                     console.log(this.restaurant);
                     this.loading = false
+                    this.state.single_restaurant = this.restaurant
                 })
                 .catch(error => {
                     console.error(error.message);
