@@ -12,6 +12,13 @@ export default {
         }
     },
     methods: {
+        addDishToCart(data) {
+            // console.log(this.cart);
+            this.cart.push(data)
+
+            this.state.cart_counter = this.cart.length
+            localStorage.setItem("cart", JSON.stringify(this.cart))
+        },
         removeDishToCart(data) {
             // console.log(this.cart);
             for (var i = 0; i < this.cart.length; i++) {
@@ -69,9 +76,15 @@ export default {
                             <div class="details p-3 flex-grow-1">
                                 <h1>{{ dish.name }}</h1>
                                 <h2 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h2>
-                                <button type="button" @click="removeDishToCart(dish)" class=" my-4 mx-3 btn btn-danger">
-                                    <font-awesome-icon icon="fa-solid fa-minus" />
-                                </button>
+                                <div class="btn-wrapper d-flex">
+                                    <button type="button" @click="removeDishToCart(dish)"
+                                        class="my-4 mx-3 btn btn-danger">
+                                        <font-awesome-icon icon="fa-solid fa-minus" />
+                                    </button>
+                                    <button @click="addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
+                                        <font-awesome-icon icon="fa-solid fa-plus" />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
