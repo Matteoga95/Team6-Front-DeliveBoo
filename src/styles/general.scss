@@ -64,7 +64,7 @@ section {
 
 /* Header */
 .header {
-    // position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -143,7 +143,7 @@ section {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 840px) {
     .header .navbar {
         position: fixed;
         /* top: 9rem; */

@@ -28,14 +28,32 @@ export default {
 
 
         <!-- Hamburger -->
-        <div class="hamburger">
+        <!-- <div class="hamburger">
             <img src="../assets/img/grid-outline.svg" alt="" />
+        </div> -->
+        <div class="dropdown hamburger">
+            <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../assets/img/grid-outline.svg" alt="" />
+            </div>
+            <ul class="dropdown-menu p-4">
+                <li> <a href="http://localhost:5173">Home</a>
+                </li>
+                <li><a href="http://127.0.0.1:8001/login" class="my-btn">Login</a></li>
+                <li class="mt-4"><font-awesome-icon icon="fa-solid fa-cart-shopping" />
+                    <span class='badge badge-warning' id='lblCartCount'>{{ state.cart_counter }}</span>
+                </li>
+            </ul>
         </div>
     </header>
 </template>
 
 
 <style lang="scss" scoped>
+.dropdown-menu li {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
 .badge {
     padding-left: 9px;
     padding-right: 9px;
