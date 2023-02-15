@@ -34,6 +34,7 @@ export default {
         <div class="dropdown hamburger">
             <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="../assets/img/grid-outline.svg" alt="" />
+                <span class='badge badge-warning' id='lblCartCount'>{{ state.cart_counter }}</span>
             </div>
             <ul class="dropdown-menu p-4">
                 <li> <a href="http://localhost:5173">Home</a>
