@@ -91,6 +91,7 @@ export default {
                 </div>
             </div>
         </div>
+        <a class="btn btn-primary fs-3 mt-5" href="#" role="button">Payment</a>
     </div>
 </template>
 
