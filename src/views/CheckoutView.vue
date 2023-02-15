@@ -11,6 +11,20 @@ export default {
             cart: []
         }
     },
+    methods: {
+        removeDishToCart(data) {
+            // console.log(this.cart);
+            for (var i = 0; i < this.cart.length; i++) {
+
+                if (this.cart[i].id === data.id) {
+
+                    this.cart.splice(i, 1);
+                    break
+                }
+
+            }
+        },
+    },
     mounted() {
         this.cart = JSON.parse(localStorage.getItem("cart"))
         console.log(this.cart);
@@ -55,6 +69,9 @@ export default {
                             <div class="details p-3 flex-grow-1">
                                 <h1>{{ dish.name }}</h1>
                                 <h2 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h2>
+                                <button type="button" @click="removeDishToCart(dish)" class=" my-4 mx-3 btn btn-danger">
+                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                </button>
                             </div>
                         </div>
                     </div>
