@@ -214,32 +214,6 @@ section {
     box-shadow: var(--box-shadow);
 }
 
-@media (max-width: 999px) {
-    .home .content h1 {
-        font-size: 4rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .home .content h1 {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .home .content p {
-        font-size: inherit;
-        margin-bottom: 1.5rem;
-    }
-
-    .home {
-        grid-template-columns: 1fr;
-    }
-
-    .home .image {
-        max-width: 40rem;
-        margin: 0 auto;
-    }
-}
 
 /* Services */
 section.services {

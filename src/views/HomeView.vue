@@ -25,8 +25,8 @@ export default {
     <!-- Home -->
     <section class="home p-0 container mt-5" id="home">
         <div class="content pb-5">
-            <div class="d-flex align-items-center pb-5">
-                <div class="col-6 px-5">
+            <div class="d-flex align-items-center pb-5 flex-md-row flex-column">
+                <div class="col-md-6 col px-5">
                     <h1>Order Your Food Takeaway <span class="main-color">and many more</span></h1>
                     <p>
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi eligendi alias nemo, eum fugiat
@@ -34,20 +34,20 @@ export default {
                         deserunt.
                     </p>
                     <div class="d-flex align-items-center justify-content-center">
-                        <h2 class="main-color me-4">Order now!</h2>
-                        <a href="#arrow_down" class="order_now main-color">
+                        <div class="main-color me-4 order">Order now!</div>
+                        <a href="#tipologies" class="order_now main-color">
                             <font-awesome-icon icon="fa-solid fa-arrow-down" />
                         </a>
                     </div>
                 </div>
-                <div class="image col-6 px-5">
+                <div class="image col-md-6 col px-5">
                     <img src="../assets/img/Delivery Address.svg" alt="" />
                 </div>
             </div>
         </div>
 
 
-        <span id="arrow_down"></span>
+        <span id="tipologies"></span>
         <SearchHome :tipologies="state.tipologies" :restaurants="state.restaurants" />
 
     </section>
@@ -64,11 +64,18 @@ export default {
         top: 0;
         transition: top ease 0.5s;
 
+
         &:hover {
             color: var(--main-color);
             cursor: pointer;
             top: -1rem;
         }
+
+    }
+
+    .order {
+        font-size: 3rem;
+        font-weight: 700;
     }
 }
 

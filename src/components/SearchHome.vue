@@ -40,13 +40,10 @@ export default {
 </script>
         
 <template>
-    <div class="tipologies d-flex py-3  " :class="state.filteredRestaurants.length > 0 ? '' : ''">
+    <div class="tipologies d-flex py-3  flex-lg-row flex-column"
+        :class="state.filteredRestaurants.length > 0 ? '' : ''">
 
-        <div class="mb-4 px-5 sidebar_tips">
-            <div class="d-flex align-items-center mb-3">
-                <h3 class="col-6 me-5">Choose one or more tipologies!</h3>
-                <a href="#arrow_down" class="my-btn my-3 mx-3" @click="state.filterRestaurants()">Filter</a>
-            </div>
+        <div class="mb-4 px-5 sidebar_tips d-flex flex-column align-items-lg-start align-items-center">
 
             <div class="col-md-6">
                 <select id="types_select" v-model="state.selectedTipes" class="dropdown" multiple>
@@ -57,18 +54,17 @@ export default {
 
                 </select>
             </div>
-            <div class="">
 
-
-                <!-- <button class="my-btn my-3 mx-3" @click="clearTypes()">Clear</button> -->
-
+            <div class="d-flex align-items-center mb-3 justify-content-center">
+                <h3 class="col-6 me-5">Choose one or more tipologies!</h3>
+                <a href="#tipologies" class="my-btn my-3 mx-3" @click="state.filterRestaurants()">Filter</a>
             </div>
         </div>
 
 
         <div class="flex-fill ">
-            <div class="container-fluid">
-                <div class="row row-cols-2">
+            <div class="container">
+                <div class="row row-cols-xl-2 row-cols-1">
                     <div v-for="restaurant in state.filteredRestaurants">
                         <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"
                             class="my-card d-flex">
@@ -86,6 +82,8 @@ export default {
                             </div>
                         </router-link>
                     </div>
+                    <h1 class="text-center" v-if="state.filteredRestaurants.length == 0">No restaurants found with that
+                        tipologies :(</h1>
                 </div>
             </div>
         </div>
@@ -97,6 +95,10 @@ export default {
 .tipologies {
     .sidebar_tips {
         height: 900px;
+
+        @media (max-width: 991px) {
+            height: 100%;
+        }
     }
 }
 
