@@ -4,6 +4,7 @@ import HomeView from './views/HomeView.vue';
 import RestaurantView from './views/RestaurantView.vue';
 import NotFoundView from './views/NotFoundView.vue';
 import SuccessView from './views/SuccessView.vue';
+import CheckoutView from './views/CheckoutView.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -29,6 +30,11 @@ const router = createRouter({
             name: 'not-found',
             component: NotFoundView
         },
+        {
+            path: '/checkout',
+            name: 'checkout',
+            component: CheckoutView
+        }
 
     ]
 })

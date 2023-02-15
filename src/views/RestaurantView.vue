@@ -244,6 +244,7 @@ export default {
                 <!-- cart -->
                 <div class="mx-5 px-5 col-4">
                     <h2 class="text-center mx-5">Cart</h2>
+                    <router-link class="btn btn-primary" :to="{ name: 'checkout' }" role="button">Checkout</router-link>
                     <div class="d-flex justify-content-start" v-for="dish in this.cart">
                         <h2 class="my-4">{{ dish.name }}</h2>
                         <button type="button" @click="removeDishToCart(dish)" class=" my-4 mx-3 btn btn-danger">
