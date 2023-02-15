@@ -250,6 +250,8 @@ export default {
                                 </button>
 
                             </div>
+                            <router-link class="btn btn-primary my-3 p-3" :to="{ name: 'checkout' }"
+                                role="button">Checkout</router-link>
                         </div>
                     </div>
                 </div>
@@ -287,7 +289,7 @@ export default {
                     <div class="my-card">
                         <div class="col-4 w-100">
                             <h1 class="mb-5">Cart</h1>
-                            <router-link class="btn btn-primary" :to="{ name: 'checkout' }" role="button">Checkout</router-link>
+
                             <h4>Total price: {{ totalCart.toFixed(2) + '€' }}</h4>
                             <div class="d-flex justify-content-between align-items-center" v-for="dish in this.cart">
                                 <div>
@@ -299,6 +301,8 @@ export default {
                                     <font-awesome-icon icon="fa-solid fa-minus" />
                                 </button>
                             </div>
+                            <router-link class="btn btn-primary my-3 p-3" :to="{ name: 'checkout' }"
+                                role="button">Checkout</router-link>
                         </div>
                     </div>
                 </div>
