@@ -179,9 +179,9 @@ export default {
 </script>
 
 <template>
-    <section class="">
+    <section class="p-0">
         <!-- <a @click="getBack()">back</a> -->
-        <div class="container ">
+        <div class="container py-5">
 
             <!-- The Modal -->
             <div id="myModal" class="modal">
@@ -202,8 +202,8 @@ export default {
 
 
             <!-- banner con la foto del ristorante -->
-            <div class="row">
-                <div class="col-3  restaurants">
+            <div class="row flex-md-row flex-column">
+                <div class="col-lg-3 col-md-6 restaurants mb-3">
                     <div class="my-card">
                         <div class="d-flex justify-content-center">
                             <img class="mb-4 cover" :src="state.imagePath(restaurant.cover_image)" alt="">
@@ -233,12 +233,35 @@ export default {
                     </div>
                 </div>
 
+                <!-- cart -->
+                <div class="d-lg-none col">
+                    <div class="my-card">
+                        <div class="col-4 w-100">
+                            <h1 class="mb-5">Cart</h1>
+                            <h4>Total price: {{ totalCart.toFixed(2) + '€' }}</h4>
+                            <div class="d-flex justify-content-between align-items-center" v-for="dish in this.cart">
+                                <div>
+                                    <h3 class="">{{ dish.name }}</h3>
+                                    <div class="">{{ dish.price + '€' }}</div>
+                                </div>
+                                <button type="button" @click="removeDishToCart(dish)"
+                                    class=" my-4 mx-3 btn btn-danger btn-sm">
+                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- piatti -->
-                <div class="col-6 d-flex justify-content-center">
+                <div class="col-lg-6 col-12 d-flex justify-content-center">
                     <div class="col-10" v-if="this.has_dishes">
                         <div v-for="dish in this.restaurant.dishes">
                             <div class="my-card d-flex p-1 my-3">
-                                <img width="200" :src="state.imagePath(dish.cover_image)" alt="">
+                                <div class="d-sm-block d-none">
+                                    <img :src="state.imagePath(dish.cover_image)" alt="">
+                                </div>
                                 <div class="details p-3 flex-grow-1">
                                     <h2>{{ dish.name }}</h2>
                                     <p>{{ dish.description }}</p>
@@ -246,8 +269,8 @@ export default {
                                 </div>
                                 <div class="align-self-center text-end">
                                     <button @click="addDishToCart(dish)"
-                                        class="btn py-2 px-3 mx-4 btn-primary d-flex align-items-center">
-                                        Add to cart
+                                        class="btn py-2 px-3 mx-4 btn-primary btn-sm d-flex align-items-center">
+                                        +
                                     </button>
                                 </div>
 
@@ -260,11 +283,11 @@ export default {
                 </div>
 
                 <!-- cart -->
-                <div class="col-3">
+                <div class="col-3 d-lg-block d-none">
                     <div class="my-card">
                         <div class="col-4 w-100">
                             <h1 class="mb-5">Cart</h1>
-                            <h4>Totale: {{ totalCart.toFixed(2) + '€' }}</h4>
+                            <h4>Total price: {{ totalCart.toFixed(2) + '€' }}</h4>
                             <div class="d-flex justify-content-between align-items-center" v-for="dish in this.cart">
                                 <div>
                                     <h3 class="">{{ dish.name }}</h3>
