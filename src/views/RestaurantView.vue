@@ -21,6 +21,22 @@ export default {
         addDishToCart(data) {
             // console.log(this.cart);
             this.cart.push(data)
+
+            this.state.cart_counter = this.cart.length
+            localStorage.setItem("cart", JSON.stringify(this.cart))
+        },
+        removeDishToCart(data) {
+            // console.log(this.cart);
+            for (var i = 0; i < this.cart.length; i++) {
+
+                if (this.cart[i].id === data.id) {
+
+                    this.cart.splice(i, 1);
+                    break
+                }
+
+            }
+
             this.state.cart_counter = this.cart.length
             localStorage.setItem("cart", JSON.stringify(this.cart))
         },
@@ -64,6 +80,7 @@ export default {
                 localStorage.setItem('dishes', JSON.stringify(this.restaurant.dishes))
                 if (!localStorage.getItem("cart")) {
                     localStorage.setItem("cart", "[]")
+
                     this.state.cart_counter = this.cart.length
                 }
             }
@@ -123,29 +140,45 @@ export default {
 
             </div>
 
-            <!-- piatti -->
-            <div v-if="this.has_dishes">
-                <div v-for="dish in this.restaurant.dishes">
-                    <div class="my-card d-flex my-5">
-                        <img width="200" :src="state.imagePath(dish.cover_image)" alt="">
-                        <div class="details p-3 flex-grow-1">
-                            <h1>{{ dish.name }}</h1>
-                            <p>{{ dish.description }}</p>
-                            <h2 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h2>
-                        </div>
-                        <div class="align-self-center text-end">
-                            <button @click="addDishToCart(dish)"
-                                class="btn py-2 px-3 mx-4 btn-primary d-flex align-items-center">
-                                Add to cart <font-awesome-icon icon="fa-solid fa-plus" class="ms-3" />
-                            </button>
+            <!-- piatti e cart-->
+            <div class="d-flex justify-content-between">
+
+                <!-- piatti -->
+                <div class="col-10" v-if="this.has_dishes">
+                    <div v-for="dish in this.restaurant.dishes">
+                        <div class="my-card d-flex my-5">
+                            <img width="200" :src="state.imagePath(dish.cover_image)" alt="">
+                            <div class="details p-3 flex-grow-1">
+                                <h1>{{ dish.name }}</h1>
+                                <p>{{ dish.description }}</p>
+                                <h2 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h2>
+                            </div>
+                            <div class="align-self-center text-end">
+                                <button @click="addDishToCart(dish)"
+                                    class="btn py-2 px-3 mx-4 btn-primary d-flex align-items-center">
+                                    Add to cart
+                                </button>
+                            </div>
+
                         </div>
 
                     </div>
-
                 </div>
-            </div>
-            <h2 class=" py-5 text-center" v-else>There are no dishes for this restaurant yet</h2>
+                <h2 class=" py-5 text-center" v-else>There are no dishes for this restaurant yet</h2>
 
+                <!-- cart -->
+                <div class="mx-5 px-5 col-4">
+                    <h2 class="text-center mx-5">Cart</h2>
+                    <div class="d-flex justify-content-start" v-for="dish in this.cart">
+                        <h2 class="my-4">{{ dish.name }}</h2>
+                        <button type="button" @click="removeDishToCart(dish)" class=" my-4 mx-3 btn btn-danger">
+                            <font-awesome-icon icon="fa-solid fa-minus" />
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
 
         </div>
     </section>
