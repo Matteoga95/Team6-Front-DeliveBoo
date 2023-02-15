@@ -27,7 +27,7 @@ export const state = reactive({
                 this.loading = true
                 this.restaurants = response.data.data.data;
                 this.filteredRestaurants = this.restaurants;
-                console.log(response.data.data.data);
+                // console.log(response.data.data.data);
                 this.loading = false
             })
             .catch(error => {
@@ -101,6 +101,10 @@ export const state = reactive({
         if (this.selectedTipes.length > 0) {
 
             for (let l = 0; l < this.restaurants.length; l++) {
+                // if (l == this.restaurants.length && this.filteredRestaurants.length == 0) {
+                //     this.filteredRestaurants.push('no restaurants found')
+                //     console.log(this.filteredRestaurants);
+                // }
                 let count = 0
                 for (let i = 0; i < this.selectedTipes.length; i++) {
                     // console.log(this.selectedTipes[i])
@@ -108,6 +112,7 @@ export const state = reactive({
                     let prova = this.restaurants[l].tipologies.find(tipi => tipi.name === this.selectedTipes[i])
                     // console.log(prova);
                     if (prova) {
+                        //conta quante volte le tipologie del ristorante fanno match con tipologie selezionate
                         count++
                         // console.log(this.restaurants[l]);
                         // console.log(count);

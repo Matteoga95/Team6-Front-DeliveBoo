@@ -64,7 +64,7 @@ section {
 
 /* Header */
 .header {
-    // position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -143,7 +143,7 @@ section {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 840px) {
     .header .navbar {
         position: fixed;
         /* top: 9rem; */
@@ -214,32 +214,6 @@ section {
     box-shadow: var(--box-shadow);
 }
 
-@media (max-width: 999px) {
-    .home .content h1 {
-        font-size: 4rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .home .content h1 {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .home .content p {
-        font-size: inherit;
-        margin-bottom: 1.5rem;
-    }
-
-    .home {
-        grid-template-columns: 1fr;
-    }
-
-    .home .image {
-        max-width: 40rem;
-        margin: 0 auto;
-    }
-}
 
 /* Services */
 section.services {
