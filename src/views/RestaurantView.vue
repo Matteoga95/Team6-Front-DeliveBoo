@@ -17,6 +17,7 @@ export default {
             state,
             loading: true,
             restaurant: [],
+            totalCart: 0,
             has_dishes: true,
             new_dish_cart: [],
             //oggetti del carrello
@@ -29,9 +30,10 @@ export default {
         addDishToCart(data) {
             //valorizzo il piatto nel return che si vuole aggiungere
             this.new_dish_cart = data
+            let price = parseFloat(data.price)
 
             //se nel carrello c'è qualcosa ed è di un ristorante non quest faccio il controllo con la modale
-            console.log(this.cart.length);
+            // console.log(this.cart.length);
             if (this.cart.length > 0) {
                 if (this.cart[0].restaurant_id != data.restaurant_id) {
                     //apro la modale
@@ -40,6 +42,9 @@ export default {
                 } else {
                     // console.log(this.cart);
                     this.cart.push(data)
+                    //aggiungo al totale
+                    this.totalCart += price
+                    // console.log(this.totalCart, 'total');
 
                     this.state.cart_counter = this.cart.length
                     localStorage.setItem("cart", JSON.stringify(this.cart))
@@ -49,6 +54,9 @@ export default {
             } else {
                 console.log(this.cart);
                 this.cart.push(data)
+                //aggiungo al totale
+                this.totalCart += price
+                console.log(this.totalCart, 'total');
 
                 this.state.cart_counter = this.cart.length
                 localStorage.setItem("cart", JSON.stringify(this.cart))
@@ -60,6 +68,11 @@ export default {
             for (var i = 0; i < this.cart.length; i++) {
 
                 if (this.cart[i].id === data.id) {
+                    // sottraggo al totale
+                    let price = parseFloat(this.cart[i].price)
+                    console.log(price);
+                    this.totalCart -= parseFloat(this.cart[i].price)
+                    console.log(this.totalCart);
 
                     this.cart.splice(i, 1);
                     break
@@ -69,9 +82,10 @@ export default {
 
             this.state.cart_counter = this.cart.length
             localStorage.setItem("cart", JSON.stringify(this.cart))
+            console.log(this.totalCart, 'tot');
         },
         getSingleRestaurant(url) {
-            console.log(url);
+            // console.log(url);
             axios
                 .get(url)
                 .then(response => {
@@ -80,7 +94,7 @@ export default {
                     this.loading = true
                     this.restaurant = response.data.data;
                     this.getHasDishes()
-                    console.log(this.restaurant);
+                    // console.log(this.restaurant);
                     this.loading = false
                     this.state.single_restaurant = this.restaurant
                 })
@@ -96,9 +110,12 @@ export default {
 
             this.new_dish_cart = []
             this.state.cart_counter = this.cart.length
+            //ritorna il carrello di prima
+            for (let i = 0; i < this.cart.length; i++) {
+                this.totalCart += parseFloat(this.cart[i].price)
+            }
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
-
 
         },
         acceptModal() {
@@ -114,6 +131,10 @@ export default {
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
 
+            //azzero il totale e aggiungo nuovo prezzo
+            const price = parseFloat(this.new_dish_cart.price)
+            this.totalCart = price
+            // console.log(this.totalCart, 'totale');
 
         },
         getHasDishes() {
@@ -241,11 +262,16 @@ export default {
                 <!-- cart -->
                 <div class="col-3">
                     <div class="my-card">
-                        <div class="mx-5 px-5 col-4">
-                            <h2 class="text-center mx-5">Cart</h2>
-                            <div class="d-flex justify-content-start" v-for="dish in this.cart">
-                                <h2 class="my-4">{{ dish.name }}</h2>
-                                <button type="button" @click="removeDishToCart(dish)" class=" my-4 mx-3 btn btn-danger">
+                        <div class="col-4 w-100">
+                            <h1 class="mb-5">Cart</h1>
+                            <h4>Totale: {{ totalCart.toFixed(2) + '€' }}</h4>
+                            <div class="d-flex justify-content-between align-items-center" v-for="dish in this.cart">
+                                <div>
+                                    <h3 class="">{{ dish.name }}</h3>
+                                    <div class="">{{ dish.price + '€' }}</div>
+                                </div>
+                                <button type="button" @click="removeDishToCart(dish)"
+                                    class=" my-4 mx-3 btn btn-danger btn-sm">
                                     <font-awesome-icon icon="fa-solid fa-minus" />
                                 </button>
 
