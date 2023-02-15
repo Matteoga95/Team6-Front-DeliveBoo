@@ -17,6 +17,7 @@ export default {
             state,
             loading: true,
             restaurant: [],
+            totalCart: 0,
             has_dishes: true,
             new_dish_cart: [],
             //oggetti del carrello
@@ -29,9 +30,10 @@ export default {
         addDishToCart(data) {
             //valorizzo il piatto nel return che si vuole aggiungere
             this.new_dish_cart = data
+            let price = parseFloat(data.price)
 
             //se nel carrello c'è qualcosa ed è di un ristorante non quest faccio il controllo con la modale
-            console.log(this.cart.length);
+            // console.log(this.cart.length);
             if (this.cart.length > 0) {
                 if (this.cart[0].restaurant_id != data.restaurant_id) {
                     //apro la modale
@@ -40,6 +42,9 @@ export default {
                 } else {
                     // console.log(this.cart);
                     this.cart.push(data)
+                    //aggiungo al totale
+                    this.totalCart += price
+                    // console.log(this.totalCart, 'total');
 
                     this.state.cart_counter = this.cart.length
                     localStorage.setItem("cart", JSON.stringify(this.cart))
@@ -49,6 +54,9 @@ export default {
             } else {
                 console.log(this.cart);
                 this.cart.push(data)
+                //aggiungo al totale
+                this.totalCart += price
+                console.log(this.totalCart, 'total');
 
                 this.state.cart_counter = this.cart.length
                 localStorage.setItem("cart", JSON.stringify(this.cart))
@@ -60,6 +68,11 @@ export default {
             for (var i = 0; i < this.cart.length; i++) {
 
                 if (this.cart[i].id === data.id) {
+                    // sottraggo al totale
+                    let price = parseFloat(this.cart[i].price)
+                    console.log(price);
+                    this.totalCart -= parseFloat(this.cart[i].price)
+                    console.log(this.totalCart);
 
                     this.cart.splice(i, 1);
                     break
@@ -69,9 +82,10 @@ export default {
 
             this.state.cart_counter = this.cart.length
             localStorage.setItem("cart", JSON.stringify(this.cart))
+            console.log(this.totalCart, 'tot');
         },
         getSingleRestaurant(url) {
-            console.log(url);
+            // console.log(url);
             axios
                 .get(url)
                 .then(response => {
@@ -80,7 +94,7 @@ export default {
                     this.loading = true
                     this.restaurant = response.data.data;
                     this.getHasDishes()
-                    console.log(this.restaurant);
+                    // console.log(this.restaurant);
                     this.loading = false
                     this.state.single_restaurant = this.restaurant
                 })
@@ -96,9 +110,12 @@ export default {
 
             this.new_dish_cart = []
             this.state.cart_counter = this.cart.length
+            //ritorna il carrello di prima
+            for (let i = 0; i < this.cart.length; i++) {
+                this.totalCart += parseFloat(this.cart[i].price)
+            }
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
-
 
         },
         acceptModal() {
@@ -114,6 +131,10 @@ export default {
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
 
+            //azzero il totale e aggiungo nuovo prezzo
+            const price = parseFloat(this.new_dish_cart.price)
+            this.totalCart = price
+            // console.log(this.totalCart, 'totale');
 
         },
         getHasDishes() {
@@ -158,9 +179,9 @@ export default {
 </script>
 
 <template>
-    <section class="">
-        <a @click="getBack()">back</a>
-        <div class="container ">
+    <section class="p-0">
+        <!-- <a @click="getBack()">back</a> -->
+        <div class="container py-5">
 
             <!-- The Modal -->
             <div id="myModal" class="modal">
@@ -181,80 +202,108 @@ export default {
 
 
             <!-- banner con la foto del ristorante -->
-            <div class="d-flex justify-content-center">
-                <img class="mb-4 cover" src="https://www.travel365.it/foto/altitude-at-shangri-la.jpg" alt="">
-            </div>
-
-
-            <!-- info del ristorante -->
-            <div class="d-flex justify-content-center text-center">
-
-                <div class="">
-                    <h1 class="mb-4">{{ this.restaurant.name }}</h1>
-                    <div class="d-flex justify-content-center" v-for="types in this.restaurant.tipologies">
-                        <p class="type">{{ types.name }} </p>
-                    </div>
-                    <div class="">
-                        <div class="d-flex">
-                            <font-awesome-icon icon="fa-solid fa-location-dot" />
-                            <h2 class="px-3">{{ this.restaurant.address }}</h2>
-
-                        </div>
-                        <div class="d-flex">
-                            <font-awesome-icon icon="fa-solid fa-phone" />
-                            <h2 class="px-3"> {{ this.restaurant.phone_number }}</h2>
+            <div class="row flex-md-row flex-column">
+                <div class="col-lg-3 col-md-6 restaurants mb-3">
+                    <div class="my-card">
+                        <div class="d-flex justify-content-center">
+                            <img class="mb-4 cover" :src="state.imagePath(restaurant.cover_image)" alt="">
                         </div>
 
+                        <!-- info del ristorante -->
+                        <div class="d-flex justify-content-center text-center">
 
-                    </div>
+                            <div class="">
+                                <h1 class="">{{ this.restaurant.name }}</h1>
+                                <div class="d-flex justify-content-center">
+                                    <div v-for="types in this.restaurant.tipologies" class="type">{{ types.name }}</div>
+                                </div>
+                                <div class="">
+                                    <div class="d-flex my-3">
+                                        <font-awesome-icon icon="fa-solid fa-location-dot" />
+                                        <div class="px-3">{{ this.restaurant.address }}</div>
 
-                </div>
-
-
-
-
-            </div>
-
-            <!-- piatti e cart-->
-            <div class="d-flex justify-content-between">
-
-                <!-- piatti -->
-                <div class="col-10" v-if="this.has_dishes">
-                    <div v-for="dish in this.restaurant.dishes">
-                        <div class="my-card d-flex my-5">
-                            <img width="200" :src="state.imagePath(dish.cover_image)" alt="">
-                            <div class="details p-3 flex-grow-1">
-                                <h1>{{ dish.name }}</h1>
-                                <p>{{ dish.description }}</p>
-                                <h2 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h2>
+                                    </div>
+                                    <div class="d-flex my-3">
+                                        <font-awesome-icon icon="fa-solid fa-phone" />
+                                        <div class="px-3"> {{ this.restaurant.phone_number }}</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="align-self-center text-end">
-                                <button @click="addDishToCart(dish)"
-                                    class="btn py-2 px-3 mx-4 btn-primary d-flex align-items-center">
-                                    Add to cart
-                                </button>
-                            </div>
-
                         </div>
-
                     </div>
                 </div>
-                <h2 class=" py-5 text-center" v-else>There are no dishes for this restaurant yet</h2>
 
                 <!-- cart -->
-                <div class="mx-5 px-5 col-4">
-                    <h2 class="text-center mx-5">Cart</h2>
-                    <router-link class="btn btn-primary" :to="{ name: 'checkout' }" role="button">Checkout</router-link>
-                    <div class="d-flex justify-content-start" v-for="dish in this.cart">
-                        <h2 class="my-4">{{ dish.name }}</h2>
-                        <button type="button" @click="removeDishToCart(dish)" class=" my-4 mx-3 btn btn-danger">
-                            <font-awesome-icon icon="fa-solid fa-minus" />
-                        </button>
+                <div class="d-lg-none col">
+                    <div class="my-card">
+                        <div class="col-4 w-100">
+                            <h1 class="mb-5">Cart</h1>
+                            <h4>Total price: {{ totalCart.toFixed(2) + '€' }}</h4>
+                            <div class="d-flex justify-content-between align-items-center" v-for="dish in this.cart">
+                                <div>
+                                    <h3 class="">{{ dish.name }}</h3>
+                                    <div class="">{{ dish.price + '€' }}</div>
+                                </div>
+                                <button type="button" @click="removeDishToCart(dish)"
+                                    class=" my-4 mx-3 btn btn-danger btn-sm">
+                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                </button>
 
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- piatti -->
+                <div class="col-lg-6 col-12 d-flex justify-content-center">
+                    <div class="col-10" v-if="this.has_dishes">
+                        <div v-for="dish in this.restaurant.dishes">
+                            <div class="my-card d-flex p-1 my-3">
+                                <div class="d-sm-block d-none">
+                                    <img :src="state.imagePath(dish.cover_image)" alt="">
+                                </div>
+                                <div class="details p-3 flex-grow-1">
+                                    <h2>{{ dish.name }}</h2>
+                                    <p>{{ dish.description }}</p>
+                                    <h4 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h4>
+                                </div>
+                                <div class="align-self-center text-end">
+                                    <button @click="addDishToCart(dish)"
+                                        class="btn py-2 px-3 mx-4 btn-primary btn-sm d-flex align-items-center">
+                                        +
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <h2 class=" py-5 text-center" v-else>There are no dishes for this restaurant yet</h2>
+
+                </div>
+
+                <!-- cart -->
+                <div class="col-3 d-lg-block d-none">
+                    <div class="my-card">
+                        <div class="col-4 w-100">
+                            <h1 class="mb-5">Cart</h1>
+                            <router-link class="btn btn-primary" :to="{ name: 'checkout' }" role="button">Checkout</router-link>
+                            <h4>Total price: {{ totalCart.toFixed(2) + '€' }}</h4>
+                            <div class="d-flex justify-content-between align-items-center" v-for="dish in this.cart">
+                                <div>
+                                    <h3 class="">{{ dish.name }}</h3>
+                                    <div class="">{{ dish.price + '€' }}</div>
+                                </div>
+                                <button type="button" @click="removeDishToCart(dish)"
+                                    class=" my-4 mx-3 btn btn-danger btn-sm">
+                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
         </div>
     </section>
@@ -269,6 +318,43 @@ export default {
     --main-color: #e29436;
     --main-color-dark: #cf4835;
 
+}
+
+.my-card {
+    padding: 1.5rem;
+    box-shadow: 0 0 3px 0px rgb(192, 192, 192);
+    border-radius: 5px;
+
+    .tipology {
+        color: #e29436;
+    }
+
+    .type {
+        color: var(--main-color-dark);
+    }
+
+    img {
+        border-radius: 5px;
+        object-fit: cover;
+        object-position: center;
+        height: 13rem;
+    }
+
+}
+
+.restaurants {
+    img {
+        border-radius: 5px;
+        object-fit: cover;
+        object-position: center;
+        height: 20rem;
+    }
+}
+
+.my-btn {
+    border-radius: 30px;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .modal {
@@ -330,26 +416,5 @@ export default {
 
 .type {
     padding: 5px;
-}
-
-.my-card {
-    padding: 1.5rem;
-    box-shadow: 0 0 6px 0px rgb(192, 192, 192);
-    border-radius: 5px;
-
-    .tipology {
-        color: #e29436;
-    }
-
-    img {
-        border-radius: 5px;
-
-    }
-
-    .my-btn {
-        border-radius: 30px;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
 }
 </style>
