@@ -8,6 +8,10 @@ export default {
     data() {
         return {
             state,
+            name: '',
+            address: '',
+            phone: '',
+            email: '',
             cart: []
         }
     },
@@ -42,30 +46,36 @@ export default {
 
 <template>
     <div class="container">
-        <h1 class="mt-5 text-center">Checkout page</h1>
+        <h1 class="mt-5 text-center">Checkout</h1>
         <div class="row">
             <div class="col-6">
                 <div class="form-wrapper">
-                    <div class="row">
-                      <div class="col-3">
-                        <form action="">
-                           <div class="mb-3">
-                              <label for="name" class="form-label">Name</label>
-                              <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="helpId">
-                              <small id="helpId" class="text-muted">Help text</small>
-                          </div>
-                          <div class="mb-3">
-                              <label for="address" class="form-label">Address</label>
-                              <input type="text" name="address" id="address" class="form-control" placeholder="" aria-describedby="helpId">
-                              <small id="helpId" class="text-muted">Help text</small>
-                          </div>
-                          <div class="mb-3">
-                              <label for="phone" class="form-label">Phone number</label>
-                              <input type="text" name="phone" id="phone" class="form-control" placeholder="" aria-describedby="helpId">
-                              <small id="helpId" class="text-muted">Help text</small>
-                          </div>
-                        </form>
-                      </div>
+                    <form action="">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" name="name" id="name" v-model="name" class="form-control"
+                                placeholder="John Doe" aria-describedby="helpId">
+                            <small id="helpId" class="text-muted">Type your name here</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" name="address" id="address" v-model="address" class="form-control"
+                                placeholder="" aria-describedby="helpId">
+                            <small id="helpId" class="text-muted">Insert your address</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone number</label>
+                            <input type="text" name="phone" id="phone" v-model="phone" class="form-control"
+                                placeholder="0123456789" aria-describedby="helpId">
+                            <small id="helpId" class="text-muted">Type your phone number</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" id="email" v-model="email" class="form-control"
+                                placeholder="johndoe@example.it" aria-describedby="helpId">
+                            <small id="helpId" class="text-muted">Type your email</small>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="col-6">
@@ -90,22 +100,33 @@ export default {
                 </div>
             </div>
         </div>
-        <a class="btn btn-primary fs-3 mt-5" href="#" role="button">Payment</a>
+        <a class="btn btn-primary fs-3 mt-5" href="#" role="button">Proceed to ayment</a>
 </div>
 </template>
 
 <style lang="scss" scoped>
 .container {
 
+    h1 {
+        font-size: 40px;
+    }
+
     .form-wrapper,
     .order-wrapper {
         margin-top: 10%;
     }
 
+    input {
+        font-size: 15px;
+        width: 65%;
+    }
+
     .order-card {
         width: 65%;
         height: 25%;
-        border: 1px solid;
+        padding: 1.5rem;
+        box-shadow: 0 0 3px 0px rgb(192, 192, 192);
+        border-radius: 5px;
 
         img {
             width: 25%;
@@ -113,5 +134,17 @@ export default {
             border-radius: 5px;
         }
 
+        .btn-primary {
+            background-color: var(--main-color);
+            border: var(--main-color-dark);
+            color: #07051a;
+            transition: 0.5s;
+
+            &:hover {
+                background-color: var(--main-color-dark);
+            }
+        }
+
     }
-}</style>
+}
+</style>
