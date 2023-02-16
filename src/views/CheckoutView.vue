@@ -127,87 +127,123 @@ export default {
     <div class="container">
         <h1 class="mt-5 text-center">You're almost there!</h1>
         <div class="row justify-content-center">
-            <div class="col-5">
-                <div class="order-wrapper">
+            <!-- cart -->
+            <div class=" col-lg-4  d-lg-none col">
+                <div class="my-card">
+                    <div class="col-4 w-100">
+                        <h1 class="mb-5">Cart</h1>
+                        <h4>Total price: {{ state.totalCart.toFixed(2) + '€' }}</h4>
 
-                    <div class="order" v-for="dish in state.cart">
-                        <div class="my-card  my-5">
-                            <div class="d-flex justify-content-center">
-                                <img class="img-fluid" :src="state.imagePath(dish.cover_image)" alt="">
-                                <div class="details p-3 flex-grow-1">
-                                    <h1>{{ dish.name }} <span>X {{ dish.qty }} </span></h1>
-                                    <h2 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h2>
-
-                                    <div class="btn-wrapper d-flex">
-                                        <button type="button" @click="state.removeDishToCart(dish)"
-                                            class="my-4 mx-3 btn btn-danger">
-                                            <font-awesome-icon icon="fa-solid fa-minus" />
-                                        </button>
-                                        <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
-                                            <font-awesome-icon icon="fa-solid fa-plus" />
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
+                        <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
 
                             <div>
-                                <h2>Total cart:</h2>
-                                <h2 class="pr-3"> {{ state.totalCart }} <span>&#8364;</span></h2>
+                                <h3 class="">{{ dish.name }}</h3>
+                                <div class="">{{ dish.price + '€' }}</div>
+                                <p>Qty: <span> {{ dish.qty }}</span> </p>
                             </div>
-                        </div>
-                    </div>
 
+                            <button type="button" @click="state.removeDishToCart(dish)"
+                                class=" my-4 mx-3 btn btn-danger btn-sm">
+                                <font-awesome-icon icon="fa-solid fa-minus" />
+                            </button>
+                            <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
+                                <font-awesome-icon icon="fa-solid fa-plus" />
+                            </button>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
-            <div class="col-5">
-                <div class="form-wrapper">
-                    <form action="">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input v-model="state.name" type="text" name="name" id="name" class="form-control"
-                                placeholder="John Doe" aria-describedby="helpId">
+
+
+
+            <!-- cart -->
+            <div class="col-lg-4  d-lg-block d-none">
+                <div class="my-card">
+                    <div class="col-4 w-100">
+                        <h1 class="mb-5">Cart</h1>
+
+                        <h4>Total price: {{ state.totalCart.toFixed(2) + '€' }}</h4>
+
+                        <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
+
+                            <div class="my-3">
+                                <h3 class="pr-5">{{ dish.name }}</h3>
+                                <div class="">{{ dish.price + '€' }}</div>
+                                <p>Qty:<span> {{ dish.qty }}</span> </p>
+                            </div>
+                            <button type="button" @click="state.removeDishToCart(dish)"
+                                class=" my-4 mx-3 btn btn-danger btn-sm">
+                                <font-awesome-icon icon="fa-solid fa-minus" />
+                            </button>
+                            <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
+                                <font-awesome-icon icon="fa-solid fa-plus" />
+                            </button>
+
                         </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <input v-model="state.address" type="text" name="address" id="address" class="form-control"
-                                placeholder="" aria-describedby="helpId">
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Phone number</label>
-                            <input v-model="state.phone" type="text" name="phone" id="phone" class="form-control"
-                                placeholder="0123456789" aria-describedby="helpId">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" id="email" v-model="email" class="form-control"
-                                placeholder="johndoe@example.it" aria-describedby="helpId">
-                        </div>
-                    </form>
+
+                    </div>
                 </div>
+            </div>
 
-                <!-- payment -->
-                <div class="text-muted mt-5 mb-2">
-                    Payment data
-                </div>
-                <div class="demo-frame">
-                    <form action="/" method="post" id="cardForm">
-                        <label class="hosted-fields--label" for="card-number">Card Number</label>
-                        <div id="card-number" class="hosted-field form-control"></div>
 
-                        <label class="hosted-fields--label" for="expiration-date">Expiration Date</label>
-                        <div id="expiration-date" class="hosted-field form-control"></div>
 
-                        <label class="hosted-fields--label" for="cvv">CVV</label>
-                        <div id="cvv" class="hosted-field form-control"></div>
 
-                        <label class="hosted-fields--label" for="postal-code">Postal Code</label>
-                        <div id="postal-code" class="hosted-field form-control"></div>
 
-                        <div class="my-3">
-                            <input type="submit" class="my-btn" value="Purchase" id="submit" />
-                        </div>
-                    </form>
+            <div class="col-lg-8 col-sm-12 d-flex justify-content-center">
+                <div class="flex-fill">
+                    <div class="text-muted m-2">
+                        Customer data
+                    </div>
+                    <div class="form-wrapper my-card">
+                        <form action="">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" name="name" id="name" v-model="name" class=" w-100 form-control"
+                                    placeholder="John Doe" aria-describedby="helpId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" name="address" id="address" v-model="address"
+                                    class="form-control w-100" placeholder="" aria-describedby="helpId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone number</label>
+                                <input type="text" name="phone" id="phone" v-model="phone" class="w-100 form-control"
+                                    placeholder="0123456789" aria-describedby="helpId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" id="email" v-model="email" class="w-100 form-control"
+                                    placeholder="johndoe@example.it" aria-describedby="helpId">
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- payment -->
+                    <div class="text-muted mt-5 mb-2">
+                        Payment data
+                    </div>
+                    <div class="form-wrapper my-card">
+                        <form action="/" method="post" id="cardForm">
+                            <label class="hosted-fields--label" for="card-number">Card Number</label>
+                            <div id="card-number" class="hosted-field w-100 form-control"></div>
+
+                            <label class="hosted-fields--label" for="expiration-date">Expiration Date</label>
+                            <div id="expiration-date" class="hosted-field w-100 form-control"></div>
+
+                            <label class="hosted-fields--label" for="cvv">CVV</label>
+                            <div id="cvv" class="hosted-field w-100 form-control"></div>
+
+                            <label class="hosted-fields--label" for="postal-code">Postal Code</label>
+                            <div id="postal-code" class="hosted-field w-100 form-control"></div>
+
+                            <div class="my-3">
+                                <input type="submit" class="w-100 my-btn" value="Purchase" id="submit" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <!-- /payment -->
             </div>
@@ -215,10 +251,12 @@ export default {
 
 
 
-</div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
+@import '../styles/general.scss';
+
 :root {
     --black: #1f1f1f;
     --white: #fff;
@@ -240,9 +278,9 @@ export default {
     }
 
     .form-wrapper,
-    .order-wrapper {
-        margin-top: 10%;
-    }
+    // .order-wrapper {
+    //     // margin-top: 10%;
+    // }
 
     input {
         font-size: 15px;

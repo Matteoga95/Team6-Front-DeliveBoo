@@ -193,10 +193,10 @@ export default {
                                 <div>
                                     <h3 class="">{{ dish.name }}</h3>
                                     <div class="">{{ dish.price + '€' }}</div>
-
+                                    <p>Qty: <span> {{ dish.qty }}</span> </p>
                                 </div>
-                                <h3 class="">X {{ dish.qty }}</h3>
-                                <button type="button" @click="removeDishToCart(dish)"
+
+                                <button type="button" @click="state.removeDishToCart(dish)"
                                     class=" my-4 mx-3 btn btn-danger btn-sm">
                                     <font-awesome-icon icon="fa-solid fa-minus" />
                                 </button>
@@ -246,9 +246,10 @@ export default {
 
                             <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
 
-                                <div>
-                                    <h3 class="">{{ dish.name }}</h3>
+                                <div class="my-3">
+                                    <h3 class="pr-5">{{ dish.name }}</h3>
                                     <div class="">{{ dish.price + '€' }}</div>
+                                    <p>Qty:<span> {{ dish.qty }}</span> </p>
                                 </div>
                                 <button type="button" @click="state.removeDishToCart(dish)"
                                     class=" my-4 mx-3 btn btn-danger btn-sm">
@@ -278,27 +279,8 @@ export default {
 
 }
 
-.my-card {
-    padding: 1.5rem;
-    box-shadow: 0 0 3px 0px rgb(192, 192, 192);
-    border-radius: 5px;
 
-    .tipology {
-        color: #e29436;
-    }
 
-    .type {
-        color: var(--main-color-dark);
-    }
-
-    img {
-        border-radius: 5px;
-        object-fit: cover;
-        object-position: center;
-        height: 13rem;
-    }
-
-}
 
 .restaurants {
     img {
@@ -309,11 +291,6 @@ export default {
     }
 }
 
-.my-btn {
-    border-radius: 30px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
 
 .modal {
     display: none;
@@ -352,25 +329,8 @@ export default {
     width: 100%;
 }
 
-.btn-primary {
-    background-color: var(--main-color);
-    border: var(--main-color-dark);
-    color: #07051a;
-    transition: 0.5s;
 
-    &:hover {
-        background-color: var(--main-color-dark);
-        ;
-    }
 
-    font-size: large;
-}
-
-.btn-danger {
-
-    transition: 0.5s;
-    font-size: large;
-}
 
 .type {
     padding: 5px;

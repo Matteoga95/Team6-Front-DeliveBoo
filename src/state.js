@@ -18,8 +18,9 @@ export const state = reactive({
     success: false,
     loading: false,
     errors: {},
-    cart_counter: 0,
-    total_cart: 0,
+
+    cart_counter: JSON.parse(localStorage.getItem("cart_counter")),
+    totalCart: 0,
     new_dish_cart: [],
     cart_dishes: JSON.parse(localStorage.getItem("dishes")),
     cart: JSON.parse(localStorage.getItem("cart")),
@@ -183,6 +184,8 @@ export const state = reactive({
 
         this.total_cart = state.getTotal_cart(this.cart)
 
+        this.getCartCounter()
+
 
     },
     checkQtyDish(data) {
@@ -248,9 +251,25 @@ export const state = reactive({
 
         }
 
-        this.cart_counter = this.cart.length
+
+        this.getCartCounter()
+
         localStorage.setItem("cart", JSON.stringify(this.cart))
-        console.log(this.total_cart, 'tot');
+
+        console.log(this.totalCart, 'tot');
+    },
+    getCartCounter() {
+        this.cart_counter = 0
+
+        if (this.cart == null) {
+            this.cart_counter = 0
+        } else {
+            this.cart.forEach(dish => {
+                this.cart_counter += dish.qty
+            });
+        }
+        localStorage.setItem("cart_counter", JSON.stringify(this.cart_counter))
+
     }
 
 })
