@@ -279,31 +279,8 @@ export default {
 
 }
 
-span {
-    font-size: larger;
-}
 
-.my-card {
-    padding: 1.5rem;
-    box-shadow: 0 0 3px 0px rgb(192, 192, 192);
-    border-radius: 5px;
 
-    .tipology {
-        color: #e29436;
-    }
-
-    .type {
-        color: var(--main-color-dark);
-    }
-
-    img {
-        border-radius: 5px;
-        object-fit: cover;
-        object-position: center;
-        height: 13rem;
-    }
-
-}
 
 .restaurants {
     img {
@@ -314,11 +291,6 @@ span {
     }
 }
 
-.my-btn {
-    border-radius: 30px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
 
 .modal {
     display: none;
@@ -357,25 +329,8 @@ span {
     width: 100%;
 }
 
-.btn-primary {
-    background-color: var(--main-color);
-    border: var(--main-color-dark);
-    color: #07051a;
-    transition: 0.5s;
 
-    &:hover {
-        background-color: var(--main-color-dark);
-        ;
-    }
 
-    font-size: large;
-}
-
-.btn-danger {
-
-    transition: 0.5s;
-    font-size: large;
-}
 
 .type {
     padding: 5px;
