@@ -121,6 +121,27 @@ export default {
         <h1 class="mt-5 text-center">You're almost there!</h1>
         <div class="row justify-content-center">
             <div class="col-5">
+                <div class="order-wrapper">
+                    <div class="order" v-for="dish in cart">
+                        <div class="order-card d-flex my-5">
+                            <img class="img-fluid" :src="state.imagePath(dish.cover_image)" alt="">
+                            <div class="details p-3 flex-grow-1">
+                                <h3>{{ dish.name }}</h3>
+                                <h5 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h5>
+                            </div>
+                            <div class="btn-wrapper d-flex align-items-center">
+                                <button type="button" @click="removeDishToCart(dish)" class="my-4 mx-3 btn btn-danger">
+                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                </button>
+                                <button @click="addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
+                                    <font-awesome-icon icon="fa-solid fa-plus" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
                 <div class="form-wrapper">
                     <form action="">
                         <div class="mb-3">
@@ -170,27 +191,6 @@ export default {
                     </form>
                 </div>
                 <!-- /payment -->
-            </div>
-            <div class="col-5">
-                <div class="order-wrapper">
-                    <div class="order" v-for="dish in cart">
-                        <div class="order-card d-flex my-5">
-                            <img class="img-fluid" :src="state.imagePath(dish.cover_image)" alt="">
-                            <div class="details p-3 flex-grow-1">
-                                <h3>{{ dish.name }}</h3>
-                                <h5 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h5>
-                            </div>
-                            <div class="btn-wrapper d-flex align-items-center">
-                                <button type="button" @click="removeDishToCart(dish)" class="my-4 mx-3 btn btn-danger">
-                                    <font-awesome-icon icon="fa-solid fa-minus" />
-                                </button>
-                                <button @click="addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
-                                    <font-awesome-icon icon="fa-solid fa-plus" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
