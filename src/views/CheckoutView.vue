@@ -7,37 +7,11 @@ export default {
 
     data() {
         return {
-            state,
-            cart: []
+            state
         }
     },
-    methods: {
-        addDishToCart(data) {
-            // console.log(this.cart);
-            this.cart.push(data)
-
-            this.state.cart_counter = this.cart.length
-            localStorage.setItem("cart", JSON.stringify(this.cart))
-        },
-        removeDishToCart(data) {
-            // console.log(this.cart);
-            for (var i = 0; i < this.cart.length; i++) {
-
-                if (this.cart[i].id === data.id) {
-
-                    this.cart.splice(i, 1);
-                    break
-                }
-
-            }
-        },
-    },
-    mounted() {
-        this.cart = JSON.parse(localStorage.getItem("cart"))
-        console.log(this.cart);
-    }
-
 }
+
 </script>
 
 <template>
@@ -70,24 +44,33 @@ export default {
             </div>
             <div class="col-6">
                 <div class="order-wrapper">
-                    <div class="order" v-for="dish in cart">
-                        <div class="my-card d-flex my-5">
-                            <img class="img-fluid" :src="state.imagePath(dish.cover_image)" alt="">
-                            <div class="details p-3 flex-grow-1">
-                                <h1>{{ dish.name }}</h1>
-                                <h2 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h2>
-                                <div class="btn-wrapper d-flex">
-                                    <button type="button" @click="removeDishToCart(dish)"
-                                        class="my-4 mx-3 btn btn-danger">
-                                        <font-awesome-icon icon="fa-solid fa-minus" />
-                                    </button>
-                                    <button @click="addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
-                                        <font-awesome-icon icon="fa-solid fa-plus" />
-                                    </button>
+                    <div class="order" v-for="dish in state.cart">
+                        <div class="my-card  my-5">
+                            <div class="d-flex justify-content-center">
+                                <img class="img-fluid" :src="state.imagePath(dish.cover_image)" alt="">
+                                <div class="details p-3 flex-grow-1">
+                                    <h1>{{ dish.name }} <span>X {{ dish.qty }} </span></h1>
+                                    <h2 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h2>
+
+                                    <div class="btn-wrapper d-flex">
+                                        <button type="button" @click="state.removeDishToCart(dish)"
+                                            class="my-4 mx-3 btn btn-danger">
+                                            <font-awesome-icon icon="fa-solid fa-minus" />
+                                        </button>
+                                        <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
+                                            <font-awesome-icon icon="fa-solid fa-plus" />
+                                        </button>
+                                    </div>
                                 </div>
+                            </div>
+
+                            <div>
+                                <h2>Total cart:</h2>
+                                <h2 class="pr-3"> {{ state.totalCart }} <span>&#8364;</span></h2>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 export const state = reactive({
-    baseUrl: 'http://127.0.0.1:8000/',
+    baseUrl: 'http://127.0.0.1:8001/',
     restaurants: [],
     tipologies: [],
     single_restaurant: [],
@@ -18,6 +18,11 @@ export const state = reactive({
     loading: false,
     errors: {},
     cart_counter: 0,
+    totalCart: 0,
+    new_dish_cart: [],
+    cart_dishes: JSON.parse(localStorage.getItem("dishes")),
+    cart: JSON.parse(localStorage.getItem("cart")),
+
 
 
     getRestaurants(url) {
@@ -137,8 +142,106 @@ export const state = reactive({
         this.filteredRestaurants.sort
 
     },
+    getTotalCart(cart_array) {
+        let total = 0
+        cart_array.forEach(dish => {
+            const dish_total = dish.price * dish.qty
+            total += dish_total
+        });
+        return total
+    },
     addDishToCart(dish) {
-        this.cart.push()
+        this.new_dish_cart = dish
+
+        if (this.cart == null) {
+            if (!localStorage.getItem("cart")) {
+                localStorage.setItem("cart", "[]")
+            }
+            this.cart = JSON.parse(localStorage.getItem("cart"))
+        }
+
+        //faccio controllo non sia un inserimento in un carrello sbagliato
+        if (this.cart.length > 0) {
+            if (this.cart[0].restaurant_id != this.new_dish_cart.restaurant_id) {
+                //apro la modale
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+                return
+            }
+        }
+
+        this.checkQtyDish(dish)
+
+        this.totalCart = state.getTotalCart(this.cart)
+
+
+    },
+    checkQtyDish(data) {
+        //valorizzo il piatto nel return che si vuole aggiungere
+
+        let newdish = data
+
+        //se il carrello è vuoto metto il piatto
+        if (this.cart.length == 0) {
+            //se il piatto non c'è lo aggiungo e ci metto qty 1
+            newdish.qty = 1
+
+            this.cart.push(newdish)
+            return
+        }
+
+        let found = false
+        let index = 0
+        //cerco il piatto nel cart se c'è
+        for (let i = 0; i < this.cart.length; i++) {
+
+            if (this.cart[i].slug == this.new_dish_cart.slug) {
+
+                found = true
+                index = i
+
+            }
+        }
+
+        if (found) {
+            //se nel carrello c'è già il piatto allora ne aggiungo solo la quantità
+            this.cart[index].qty = this.cart[index].qty + 1
+
+        } else {
+            //se il piatto non c'è lo aggiungo e ci metto qty 1
+            newdish.qty = 1
+            this.cart.push(newdish)
+
+        }
+
+        localStorage.setItem("cart", JSON.stringify(this.cart))
+
+        console.log(this.cart);
+    },
+    removeDishToCart(data) {
+        // console.log(this.cart);
+        for (var i = 0; i < this.cart.length; i++) {
+
+            if (this.cart[i].id === data.id) {
+
+                //controllo la qty, se 1 tolgo il piatto altrimenti la abbasso di 1
+                if (this.cart[i].qty == 1) {
+                    this.cart.splice(i, 1);
+                } else {
+                    this.cart[i].qty -= 1
+                }
+
+                this.totalCart = this.getTotalCart(this.cart)
+
+
+                break
+            }
+
+        }
+
+        this.cart_counter = this.cart.length
+        localStorage.setItem("cart", JSON.stringify(this.cart))
+        console.log(this.totalCart, 'tot');
     }
 
 })
