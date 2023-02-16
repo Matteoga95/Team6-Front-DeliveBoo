@@ -51,7 +51,7 @@ export default {
             this.state.new_dish_cart = []
             this.state.cart_counter = this.state.cart.length
             //ritorna il carrello di prima
-            for (let i = 0; i < this.cart.length; i++) {
+            for (let i = 0; i < this.state.cart.length; i++) {
 
                 this.state.totalCart += parseFloat(this.state.cart[i].price)
 
@@ -64,7 +64,7 @@ export default {
             //in questo caso tolgo la modale e cancello il carrello e ci metto il piatto che si voleva aggiungere
 
             this.state.cart = []
-            this.state.checkQtyDish()
+            this.state.checkQtyDish(this.state.new_dish_cart)
             // this.cart.push(this.new_dish_cart)
 
             this.state.cart_counter = this.state.cart.length
@@ -107,48 +107,6 @@ export default {
                 }
             }
         },
-        // checkQtyDish(data) {
-        //     //valorizzo il piatto nel return che si vuole aggiungere
-
-        //     let newdish = data
-
-        //     //se il carrello è vuoto metto il piatto
-        //     if (this.cart.length == 0) {
-        //         //se il piatto non c'è lo aggiungo e ci metto qty 1
-        //         newdish.qty = 1
-
-        //         this.cart.push(newdish)
-        //         return
-        //     }
-
-        //     let found = false
-        //     let index = 0
-        //     //cerco il piatto nel cart se c'è
-        //     for (let i = 0; i < this.cart.length; i++) {
-
-        //         if (this.cart[i].slug == this.new_dish_cart.slug) {
-
-        //             found = true
-        //             index = i
-
-        //         }
-        //     }
-
-        //     if (found) {
-        //         //se nel carrello c'è già il piatto allora ne aggiungo solo la quantità
-        //         this.cart[index].qty = this.cart[index].qty + 1
-
-        //     } else {
-        //         //se il piatto non c'è lo aggiungo e ci metto qty 1
-        //         newdish.qty = 1
-        //         this.cart.push(newdish)
-
-        //     }
-
-        //     localStorage.setItem("cart", JSON.stringify(this.cart))
-
-        //     console.log(this.cart);
-        // },
 
         getBack() {
 
@@ -306,7 +264,7 @@ export default {
 
 
         </div>
-</section>
+    </section>
 </template>
 
 
