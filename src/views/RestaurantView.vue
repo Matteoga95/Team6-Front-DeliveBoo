@@ -20,69 +20,10 @@ export default {
             has_dishes: true,
             new_dish_cart: [],
             //oggetti del carrello
-            cart_dishes: JSON.parse(localStorage.getItem("dishes")),
-            cart: JSON.parse(localStorage.getItem("cart")),
 
         }
     },
     methods: {
-        addDishToCart(data) {
-            //valorizzo il piatto nel return che si vuole aggiungere
-            this.new_dish_cart = data
-            let price = parseFloat(data.price)
-
-            //se nel carrello c'è qualcosa ed è di un ristorante non quest faccio il controllo con la modale
-            // console.log(this.cart.length);
-            if (this.cart.length > 0) {
-                if (this.cart[0].restaurant_id != data.restaurant_id) {
-                    //apro la modale
-                    var modal = document.getElementById("myModal");
-                    modal.style.display = "block";
-                } else {
-                    // console.log(this.cart);
-                    this.cart.push(data)
-                    //aggiungo al totale
-                    state.totalCart += price
-                    // console.log(state.totalCart, 'total');
-
-                    this.state.cart_counter = this.cart.length
-                    localStorage.setItem("cart", JSON.stringify(this.cart))
-
-                }
-
-            } else {
-                console.log(this.cart);
-                this.cart.push(data)
-                //aggiungo al totale
-                state.totalCart += price
-                console.log(state.totalCart, 'total');
-
-                this.state.cart_counter = this.cart.length
-                localStorage.setItem("cart", JSON.stringify(this.cart))
-
-            }
-        },
-        removeDishToCart(data) {
-            // console.log(this.cart);
-            for (var i = 0; i < this.cart.length; i++) {
-
-                if (this.cart[i].id === data.id) {
-                    // sottraggo al totale
-                    let price = parseFloat(this.cart[i].price)
-                    console.log(price);
-                    state.totalCart -= parseFloat(this.cart[i].price)
-                    console.log(state.totalCart);
-
-                    this.cart.splice(i, 1);
-                    break
-                }
-
-            }
-
-            this.state.cart_counter = this.cart.length
-            localStorage.setItem("cart", JSON.stringify(this.cart))
-            console.log(state.totalCart, 'tot');
-        },
         getSingleRestaurant(url) {
             // console.log(url);
             axios
@@ -107,11 +48,13 @@ export default {
         cancelModal() {
             //in questo caso tolgo la modale e non ci metto il piatto che si voleva aggiungere
 
-            this.new_dish_cart = []
-            this.state.cart_counter = this.cart.length
+            this.state.new_dish_cart = []
+            this.state.cart_counter = this.state.cart.length
             //ritorna il carrello di prima
             for (let i = 0; i < this.cart.length; i++) {
-                state.totalCart += parseFloat(this.cart[i].price)
+
+                this.state.totalCart += parseFloat(this.state.cart[i].price)
+
             }
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
@@ -120,20 +63,23 @@ export default {
         acceptModal() {
             //in questo caso tolgo la modale e cancello il carrello e ci metto il piatto che si voleva aggiungere
 
-            this.cart = []
-            this.cart.push(this.new_dish_cart)
+            this.state.cart = []
+            this.state.checkQtyDish()
+            // this.cart.push(this.new_dish_cart)
 
-            this.state.cart_counter = this.cart.length
-            localStorage.setItem("cart", JSON.stringify(this.cart))
+            this.state.cart_counter = this.state.cart.length
+            // localStorage.setItem("cart", JSON.stringify(this.cart))
 
 
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
 
             //azzero il totale e aggiungo nuovo prezzo
-            const price = parseFloat(this.new_dish_cart.price)
-            state.totalCart = price
-            // console.log(state.totalCart, 'totale');
+
+            const price = parseFloat(this.state.new_dish_cart.price)
+            this.state.totalCart = price
+            // console.log(this.totalCart, 'totale');
+
 
         },
         getHasDishes() {
@@ -157,10 +103,53 @@ export default {
                 if (!localStorage.getItem("cart")) {
                     localStorage.setItem("cart", "[]")
 
-                    this.state.cart_counter = this.cart.length
+                    this.state.cart_counter = 0
                 }
             }
         },
+        // checkQtyDish(data) {
+        //     //valorizzo il piatto nel return che si vuole aggiungere
+
+        //     let newdish = data
+
+        //     //se il carrello è vuoto metto il piatto
+        //     if (this.cart.length == 0) {
+        //         //se il piatto non c'è lo aggiungo e ci metto qty 1
+        //         newdish.qty = 1
+
+        //         this.cart.push(newdish)
+        //         return
+        //     }
+
+        //     let found = false
+        //     let index = 0
+        //     //cerco il piatto nel cart se c'è
+        //     for (let i = 0; i < this.cart.length; i++) {
+
+        //         if (this.cart[i].slug == this.new_dish_cart.slug) {
+
+        //             found = true
+        //             index = i
+
+        //         }
+        //     }
+
+        //     if (found) {
+        //         //se nel carrello c'è già il piatto allora ne aggiungo solo la quantità
+        //         this.cart[index].qty = this.cart[index].qty + 1
+
+        //     } else {
+        //         //se il piatto non c'è lo aggiungo e ci metto qty 1
+        //         newdish.qty = 1
+        //         this.cart.push(newdish)
+
+        //     }
+
+        //     localStorage.setItem("cart", JSON.stringify(this.cart))
+
+        //     console.log(this.cart);
+        // },
+
         getBack() {
 
             this.$router.go(-1)
@@ -200,8 +189,10 @@ export default {
             </div>
 
 
-            <!-- banner con la foto del ristorante -->
+
             <div class="row flex-md-row flex-column">
+
+                <!-- banner con la foto del ristorante -->
                 <div class="col-lg-3 col-md-6 restaurants mb-3">
                     <div class="my-card">
                         <div class="d-flex justify-content-center">
@@ -238,11 +229,15 @@ export default {
                         <div class="col-4 w-100">
                             <h1 class="mb-5">Cart</h1>
                             <h4>Total price: {{ state.totalCart.toFixed(2) + '€' }}</h4>
-                            <div class="d-flex justify-content-between align-items-center" v-for="dish in this.cart">
+
+                            <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
+
                                 <div>
                                     <h3 class="">{{ dish.name }}</h3>
                                     <div class="">{{ dish.price + '€' }}</div>
+
                                 </div>
+                                <h3 class="">X {{ dish.qty }}</h3>
                                 <button type="button" @click="removeDishToCart(dish)"
                                     class=" my-4 mx-3 btn btn-danger btn-sm">
                                     <font-awesome-icon icon="fa-solid fa-minus" />
@@ -269,7 +264,7 @@ export default {
                                     <h4 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h4>
                                 </div>
                                 <div class="align-self-center text-end">
-                                    <button @click="addDishToCart(dish)"
+                                    <button @click="state.addDishToCart(dish)"
                                         class="btn py-2 px-3 mx-4 btn-primary btn-sm d-flex align-items-center">
                                         +
                                     </button>
@@ -290,12 +285,14 @@ export default {
                             <h1 class="mb-5">Cart</h1>
 
                             <h4>Total price: {{ state.totalCart.toFixed(2) + '€' }}</h4>
-                            <div class="d-flex justify-content-between align-items-center" v-for="dish in this.cart">
+
+                            <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
+
                                 <div>
                                     <h3 class="">{{ dish.name }}</h3>
                                     <div class="">{{ dish.price + '€' }}</div>
                                 </div>
-                                <button type="button" @click="removeDishToCart(dish)"
+                                <button type="button" @click="state.removeDishToCart(dish)"
                                     class=" my-4 mx-3 btn btn-danger btn-sm">
                                     <font-awesome-icon icon="fa-solid fa-minus" />
                                 </button>
