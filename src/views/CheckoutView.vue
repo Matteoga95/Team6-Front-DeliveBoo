@@ -46,25 +46,35 @@ export default {
         <div class="row">
             <div class="col-6">
                 <div class="form-wrapper">
-                    <div class="mb-3">
-                        <label for="" class="form-label">Name</label>
-                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Last Name</label>
-                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Address</label>
-                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">City</label>
-                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
+                    <div class="row">
+                        <div class="col-3">
+                            <form action="">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder=""
+                                        aria-describedby="helpId">
+                                    <small id="helpId" class="text-muted">Help text</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Last Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder=""
+                                        aria-describedby="helpId">
+                                    <small id="helpId" class="text-muted">Help text</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Address</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder=""
+                                        aria-describedby="helpId">
+                                    <small id="helpId" class="text-muted">Help text</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">City</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder=""
+                                        aria-describedby="helpId">
+                                    <small id="helpId" class="text-muted">Help text</small>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,7 +87,7 @@ export default {
                                 <h3>{{ dish.name }}</h3>
                                 <h5 class="pr-3"> {{ dish.price }} <span>&#8364;</span></h5>
                             </div>
-                            <div class="btn-wrapper">
+                            <div class="btn-wrapper d-flex align-items-center">
                                 <button type="button" @click="removeDishToCart(dish)" class="my-4 mx-3 btn btn-danger">
                                     <font-awesome-icon icon="fa-solid fa-minus" />
                                 </button>
@@ -91,7 +101,7 @@ export default {
             </div>
         </div>
         <a class="btn btn-primary fs-3 mt-5" href="#" role="button">Payment</a>
-    </div>
+</div>
 </template>
 
 <style lang="scss" scoped>
@@ -103,19 +113,15 @@ export default {
     }
 
     .order-card {
-        width: 70%;
+        width: 65%;
         height: 25%;
         border: 1px solid;
-
-        .tipology {
-            color: #e29436;
-        }
 
         img {
             width: 25%;
             height: 25%;
             border-radius: 5px;
         }
+
     }
-}
-</style>
+}</style>
