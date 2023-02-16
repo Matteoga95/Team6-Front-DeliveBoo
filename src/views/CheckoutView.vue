@@ -47,35 +47,25 @@ export default {
             <div class="col-6">
                 <div class="form-wrapper">
                     <div class="row">
-                        <div class="col-3">
-                            <form action="">
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Name</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder=""
-                                        aria-describedby="helpId">
-                                    <small id="helpId" class="text-muted">Help text</small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Last Name</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder=""
-                                        aria-describedby="helpId">
-                                    <small id="helpId" class="text-muted">Help text</small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Address</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder=""
-                                        aria-describedby="helpId">
-                                    <small id="helpId" class="text-muted">Help text</small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">City</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder=""
-                                        aria-describedby="helpId">
-                                    <small id="helpId" class="text-muted">Help text</small>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                      <div class="col-3">
+                        <form action="">
+                           <div class="mb-3">
+                              <label for="name" class="form-label">Name</label>
+                              <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="helpId">
+                              <small id="helpId" class="text-muted">Help text</small>
+                          </div>
+                          <div class="mb-3">
+                              <label for="address" class="form-label">Address</label>
+                              <input type="text" name="address" id="address" class="form-control" placeholder="" aria-describedby="helpId">
+                              <small id="helpId" class="text-muted">Help text</small>
+                          </div>
+                          <div class="mb-3">
+                              <label for="phone" class="form-label">Phone number</label>
+                              <input type="text" name="phone" id="phone" class="form-control" placeholder="" aria-describedby="helpId">
+                              <small id="helpId" class="text-muted">Help text</small>
+                          </div>
+                        </form>
+                      </div>
                 </div>
             </div>
             <div class="col-6">

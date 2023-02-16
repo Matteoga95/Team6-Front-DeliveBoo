@@ -12,8 +12,9 @@ export const state = reactive({
     loading: true,
     loadingTipologies: true,
     name: '',
-    email: '',
-    message: '',
+    address: '',
+    phone: '',
+    totalCart: 0,
     success: false,
     loading: false,
     errors: {},
@@ -65,17 +66,18 @@ export const state = reactive({
         this.getRestaurants(url)
     },
     //send email
-    sendForm() {
+    sendOrder() {
         state.loading = true
 
         const data = {
             name: state.name,
-            email: state.email,
-            message: state.message
+            address: state.address,
+            phone: state.phone,
+            totalCart: state.totalCart
         }
 
         axios
-            .post(state.baseUrl + 'api/contacts/', data)
+            .post(state.baseUrl + 'api/orders/', data)
             .then((response => {
 
                 state.success = response.data.success
@@ -84,8 +86,8 @@ export const state = reactive({
 
                 if (state.success) {
                     state.name = '',
-                        state.email = '',
-                        state.message = '',
+                        state.address = '',
+                        state.phone = '',
                         state.errors = {}
                 } else {
                     state.errors = response.data.errors
