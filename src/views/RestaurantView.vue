@@ -101,11 +101,11 @@ export default {
         cancelModal() {
             //in questo caso tolgo la modale e non ci metto il piatto che si voleva aggiungere
 
-            this.new_dish_cart = []
-            this.state.cart_counter = this.cart.length
+            this.state.new_dish_cart = []
+            this.state.cart_counter = this.state.cart.length
             //ritorna il carrello di prima
             for (let i = 0; i < this.cart.length; i++) {
-                this.totalCart += parseFloat(this.cart[i].price)
+                this.state.totalCart += parseFloat(this.state.cart[i].price)
             }
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
