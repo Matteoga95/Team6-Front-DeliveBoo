@@ -118,9 +118,9 @@ export default {
 
 <template>
     <div class="container">
-        <h1 class="mt-5 text-center">Checkout</h1>
-        <div class="row">
-            <div class="col-6">
+        <h1 class="mt-5 text-center">You're almost there!</h1>
+        <div class="row justify-content-center">
+            <div class="col-5">
                 <div class="form-wrapper">
                     <form action="">
                         <div class="mb-3">
@@ -147,6 +147,9 @@ export default {
                 </div>
 
                 <!-- payment -->
+                <div class="text-muted mt-5 mb-2">
+                    Payment data
+                </div>
                 <div class="demo-frame">
                     <form action="/" method="post" id="cardForm">
                         <label class="hosted-fields--label" for="card-number">Card Number</label>
@@ -168,7 +171,7 @@ export default {
                 </div>
                 <!-- /payment -->
             </div>
-            <div class="col-6">
+            <div class="col-5">
                 <div class="order-wrapper">
                     <div class="order" v-for="dish in cart">
                         <div class="order-card d-flex my-5">
