@@ -9,10 +9,6 @@ export default {
     data() {
         return {
             state,
-            name: '',
-            address: '',
-            phone: '',
-            email: '',
             cart: []
         }
     },
@@ -132,7 +128,7 @@ export default {
                 <div class="my-card">
                     <div class="col-4 w-100">
                         <h1 class="mb-5">Cart</h1>
-                        <h4>Total price: {{ state.totalCart.toFixed(2) + '€' }}</h4>
+                        <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
 
                         <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
 
@@ -164,7 +160,7 @@ export default {
                     <div class="col-4 w-100">
                         <h1 class="mb-5">Cart</h1>
 
-                        <h4>Total price: {{ state.totalCart.toFixed(2) + '€' }}</h4>
+                        <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
 
                         <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
 
@@ -187,10 +183,6 @@ export default {
                 </div>
             </div>
 
-
-
-
-
             <div class="col-lg-8 col-sm-12 d-flex justify-content-center">
                 <div class="flex-fill">
                     <div class="text-muted m-2">
@@ -200,17 +192,17 @@ export default {
                         <form action="">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" name="name" id="name" v-model="name" class=" w-100 form-control"
+                                <input type="text" name="name" id="name" v-model="state.name" class=" w-100 form-control"
                                     placeholder="John Doe" aria-describedby="helpId">
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <input type="text" name="address" id="address" v-model="address"
+                                <input type="text" name="address" id="address" v-model="state.address"
                                     class="form-control w-100" placeholder="" aria-describedby="helpId">
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone number</label>
-                                <input type="text" name="phone" id="phone" v-model="phone" class="w-100 form-control"
+                                <input type="text" name="phone" id="phone" v-model="state.phone" class="w-100 form-control"
                                     placeholder="0123456789" aria-describedby="helpId">
                             </div>
                             <div class="mb-3">
@@ -251,7 +243,7 @@ export default {
 
 
 
-    </div>
+</div>
 </template>
 
 <style lang="scss" scoped>

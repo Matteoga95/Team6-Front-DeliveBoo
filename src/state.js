@@ -20,7 +20,6 @@ export const state = reactive({
     errors: {},
 
     cart_counter: JSON.parse(localStorage.getItem("cart_counter")),
-    totalCart: 0,
     new_dish_cart: [],
     cart_dishes: JSON.parse(localStorage.getItem("dishes")),
     cart: JSON.parse(localStorage.getItem("cart")),
@@ -75,14 +74,17 @@ export const state = reactive({
     sendOrder() {
         state.loading = true
 
+        state.cart.forEach(dish => {
+            dish.category_id = null
+        });
         const data = {
             name: state.name,
             address: state.address,
             phone: state.phone,
             total_payment: state.total_cart,
-            cart: state.cart
-        }
+            cart: state.cart,
 
+        }
         axios
             .post(state.baseUrl + 'api/orders', data)
             .then((response => {
@@ -256,7 +258,7 @@ export const state = reactive({
 
         localStorage.setItem("cart", JSON.stringify(this.cart))
 
-        console.log(this.totalCart, 'tot');
+        console.log(this.total_cart, 'tot');
     },
     getCartCounter() {
         this.cart_counter = 0

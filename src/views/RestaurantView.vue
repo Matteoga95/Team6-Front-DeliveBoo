@@ -53,7 +53,7 @@ export default {
             //ritorna il carrello di prima
             for (let i = 0; i < this.state.cart.length; i++) {
 
-                this.state.totalCart += parseFloat(this.state.cart[i].price)
+                this.state.total_cart += parseFloat(this.state.cart[i].price)
 
             }
             var modal = document.getElementById("myModal");
@@ -77,8 +77,8 @@ export default {
             //azzero il totale e aggiungo nuovo prezzo
 
             const price = parseFloat(this.state.new_dish_cart.price)
-            this.state.totalCart = price
-            // console.log(this.totalCart, 'totale');
+            this.state.total_cart = price
+            // console.log(this.total_cart, 'totale');
 
 
         },
@@ -186,7 +186,7 @@ export default {
                     <div class="my-card">
                         <div class="col-4 w-100">
                             <h1 class="mb-5">Cart</h1>
-                            <h4>Total price: {{ state.totalCart.toFixed(2) + '€' }}</h4>
+                            <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
 
                             <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
 
@@ -242,7 +242,7 @@ export default {
                         <div class="col-4 w-100">
                             <h1 class="mb-5">Cart</h1>
 
-                            <h4>Total price: {{ state.totalCart.toFixed(2) + '€' }}</h4>
+                            <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
 
                             <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
 
@@ -265,7 +265,7 @@ export default {
 
 
         </div>
-    </section>
+</section>
 </template>
 
 
