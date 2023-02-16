@@ -209,11 +209,11 @@ export default {
                 </div>
 
                 <!-- piatti -->
-                <div class="col-lg-6 col-12 d-flex justify-content-center">
+                <div class="col-lg-6 col-12 d-flex justify-content-center dishes">
                     <div class="col-10" v-if="this.has_dishes">
                         <div v-for="dish in this.restaurant.dishes">
                             <div class="my-card d-flex p-1 my-3">
-                                <div class="d-sm-block d-none">
+                                <div class="d-sm-block d-none col-5">
                                     <img :src="state.imagePath(dish.cover_image)" alt="">
                                 </div>
                                 <div class="details p-3 flex-grow-1">
@@ -265,7 +265,7 @@ export default {
 
 
         </div>
-</section>
+    </section>
 </template>
 
 
@@ -279,7 +279,11 @@ export default {
 
 }
 
-
+.dishes {
+    img {
+        width: 100%;
+    }
+}
 
 
 .restaurants {

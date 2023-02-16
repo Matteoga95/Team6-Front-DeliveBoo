@@ -21,8 +21,7 @@ export default {
 }
 </script>
 
-<template>
-    <!-- Home -->
+<template><!-- Home -->
     <section class="home p-0 container mt-5" id="home">
         <div class="content pb-5">
             <div class="d-flex align-items-center pb-5 flex-md-row flex-column">
@@ -48,9 +47,13 @@ export default {
 
 
         <span id="tipologies"></span>
-        <SearchHome :tipologies="state.tipologies" :restaurants="state.restaurants" />
+        <div class="pt-5">
+            <div class="pt-5 mt-5">
+                <SearchHome :tipologies="state.tipologies" :restaurants="state.restaurants" />
 
-    </section>
+            </div>
+        </div>
+</section>
 </template>
 
 

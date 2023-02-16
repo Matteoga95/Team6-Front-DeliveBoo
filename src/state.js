@@ -272,6 +272,12 @@ export const state = reactive({
         }
         localStorage.setItem("cart_counter", JSON.stringify(this.cart_counter))
 
+    },
+    emptyCart() {
+        localStorage.setItem("cart", "[]")
+        this.cart = []
+        this.getCartCounter()
+
     }
 
 })

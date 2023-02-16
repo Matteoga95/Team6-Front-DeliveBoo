@@ -1,28 +1,26 @@
 <script>
+import { state } from '../state'
+
 export default {
-    name: 'SuccessView'
+    name: 'SuccessView',
+    data() {
+        return {
+            state
+        }
+    },
+    mounted() {
+        state.emptyCart()
+    }
 }
 </script>
 
 <template>
-    <!-- Home -->
-    <!-- SE SERVE STA QUA -->
-    <section class="home" id="home">
-        <div class="content">
-            <h1>Order Your Food Takeaway <span class="main-color">and many more</span></h1>
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi eligendi alias nemo, eum fugiat
-                provident consequuntur velit laudantium fuga hic reprehenderit voluptatum placeat repellat deserunt.
-            </p>
-            <a href="#" class="home-btn">Go to Restaurants</a>
+    <div class="container my-5 text-center fw-b fs-1">
+        <div class="alert alert-success p-5">
+            Order success!
         </div>
-        <div class="image">
-            <img src="../assets/img/Delivery Address.svg" alt="" />
-        </div>
-    </section>
+</div>
 </template>
 
 
-<style lang="scss" scoped>
-@import '../styles/general.scss';
-</style>
+<style lang="scss" scoped>@import '../styles/general.scss';</style>
