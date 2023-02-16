@@ -1,6 +1,7 @@
 <script>
 
 import { state } from '../state.js'
+import { router } from '../router'
 
 export default {
     name: 'CheckoutView',
@@ -38,7 +39,7 @@ export default {
     },
     mounted() {
         this.cart = JSON.parse(localStorage.getItem("cart"))
-        console.log(this.cart);
+        // console.log(this.cart);
 
         //payment
         var form = document.querySelector('#cardForm');
@@ -103,7 +104,12 @@ export default {
                             return;
                         }
 
-                        alert('Submit your nonce (' + payload.nonce + ') to your server here!');
+                        // alert('Submit your nonce (' + payload.nonce + ') to your server here!');
+
+                        //invio dati ordine al front-end
+                        state.sendOrder();
+                        //rimando alla SuccessView
+                        router.push({ name: 'success' })
                     });
                 };
 
@@ -159,17 +165,17 @@ export default {
                     <form action="">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" name="name" id="name" v-model="name" class="form-control"
+                            <input v-model="state.name" type="text" name="name" id="name" class="form-control"
                                 placeholder="John Doe" aria-describedby="helpId">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" name="address" id="address" v-model="address" class="form-control"
+                            <input v-model="state.address" type="text" name="address" id="address" class="form-control"
                                 placeholder="" aria-describedby="helpId">
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone number</label>
-                            <input type="text" name="phone" id="phone" v-model="phone" class="form-control"
+                            <input v-model="state.phone" type="text" name="phone" id="phone" class="form-control"
                                 placeholder="0123456789" aria-describedby="helpId">
                         </div>
                         <div class="mb-3">

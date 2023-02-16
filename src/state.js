@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 export const state = reactive({
-    baseUrl: 'http://127.0.0.1:8001/',
+    baseUrl: 'http://127.0.0.1:8000/',
     restaurants: [],
     tipologies: [],
     single_restaurant: [],
@@ -14,12 +14,12 @@ export const state = reactive({
     name: '',
     address: '',
     phone: '',
-    totalCart: 0,
+    total_cart: 0,
     success: false,
     loading: false,
     errors: {},
     cart_counter: 0,
-    totalCart: 0,
+    total_cart: 0,
     new_dish_cart: [],
     cart_dishes: JSON.parse(localStorage.getItem("dishes")),
     cart: JSON.parse(localStorage.getItem("cart")),
@@ -78,11 +78,12 @@ export const state = reactive({
             name: state.name,
             address: state.address,
             phone: state.phone,
-            totalCart: state.totalCart
+            total_payment: state.total_cart,
+            cart: state.cart
         }
 
         axios
-            .post(state.baseUrl + 'api/orders/', data)
+            .post(state.baseUrl + 'api/orders', data)
             .then((response => {
 
                 state.success = response.data.success
@@ -93,13 +94,19 @@ export const state = reactive({
                     state.name = '',
                         state.address = '',
                         state.phone = '',
-                        state.errors = {}
+                        state.errors = {},
+                        state.date_of_order = ''
                 } else {
                     state.errors = response.data.errors
                 }
 
                 state.loading = false
             }))
+            .catch(error => {
+                if (error.response) {
+                    console.log(error.response);
+                }
+            })
     },
     //filtra ristoranti dinamicamente
     filterRestaurants() {
@@ -144,7 +151,7 @@ export const state = reactive({
         this.filteredRestaurants.sort
 
     },
-    getTotalCart(cart_array) {
+    getTotal_cart(cart_array) {
         let total = 0
         cart_array.forEach(dish => {
             const dish_total = dish.price * dish.qty
@@ -174,7 +181,7 @@ export const state = reactive({
 
         this.checkQtyDish(dish)
 
-        this.totalCart = state.getTotalCart(this.cart)
+        this.total_cart = state.getTotal_cart(this.cart)
 
 
     },
@@ -233,7 +240,7 @@ export const state = reactive({
                     this.cart[i].qty -= 1
                 }
 
-                this.totalCart = this.getTotalCart(this.cart)
+                this.total_cart = this.getTotal_cart(this.cart)
 
 
                 break
@@ -243,7 +250,7 @@ export const state = reactive({
 
         this.cart_counter = this.cart.length
         localStorage.setItem("cart", JSON.stringify(this.cart))
-        console.log(this.totalCart, 'tot');
+        console.log(this.total_cart, 'tot');
     }
 
 })
