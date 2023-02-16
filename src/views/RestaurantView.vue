@@ -17,7 +17,6 @@ export default {
             state,
             loading: true,
             restaurant: [],
-
             has_dishes: true,
             new_dish_cart: [],
             //oggetti del carrello
@@ -25,58 +24,6 @@ export default {
         }
     },
     methods: {
-
-        // addDishToCart(data) {
-        //     this.new_dish_cart = data
-
-        //     if (this.cart == null) {
-        //         if (!localStorage.getItem("cart")) {
-        //             localStorage.setItem("cart", "[]")
-        //         }
-        //         this.cart = JSON.parse(localStorage.getItem("cart"))
-        //     }
-
-        //     //faccio controllo non sia un inserimento in un carrello sbagliato
-        //     if (this.cart.length > 0) {
-        //         if (this.cart[0].restaurant_id != this.new_dish_cart.restaurant_id) {
-        //             //apro la modale
-        //             var modal = document.getElementById("myModal");
-        //             modal.style.display = "block";
-        //             return
-        //         }
-        //     }
-
-        //     this.checkQtyDish(data)
-
-        //     this.totalCart = state.getTotalCart(this.cart)
-
-
-        // },
-        // removeDishToCart(data) {
-        //     // console.log(this.cart);
-        //     for (var i = 0; i < this.cart.length; i++) {
-
-        //         if (this.cart[i].id === data.id) {
-
-        //             //controllo la qty, se 1 tolgo il piatto altrimenti la abbasso di 1
-        //             if (this.cart[i].qty == 1) {
-        //                 this.cart.splice(i, 1);
-        //             } else {
-        //                 this.cart[i].qty -= 1
-        //             }
-
-        //             this.totalCart = state.getTotalCart(this.cart)
-
-
-        //             break
-        //         }
-
-        //     }
-
-        //     this.state.cart_counter = this.cart.length
-        //     localStorage.setItem("cart", JSON.stringify(this.cart))
-        //     console.log(this.totalCart, 'tot');
-        // },
         getSingleRestaurant(url) {
             // console.log(url);
             axios
@@ -105,7 +52,9 @@ export default {
             this.state.cart_counter = this.state.cart.length
             //ritorna il carrello di prima
             for (let i = 0; i < this.cart.length; i++) {
+
                 this.state.totalCart += parseFloat(this.state.cart[i].price)
+
             }
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
@@ -126,9 +75,11 @@ export default {
             modal.style.display = "none";
 
             //azzero il totale e aggiungo nuovo prezzo
+
             const price = parseFloat(this.state.new_dish_cart.price)
-            this.totalCart = price
+            this.state.totalCart = price
             // console.log(this.totalCart, 'totale');
+
 
         },
         getHasDishes() {
@@ -278,7 +229,9 @@ export default {
                         <div class="col-4 w-100">
                             <h1 class="mb-5">Cart</h1>
                             <h4>Total price: {{ state.totalCart.toFixed(2) + '€' }}</h4>
+
                             <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
+
                                 <div>
                                     <h3 class="">{{ dish.name }}</h3>
                                     <div class="">{{ dish.price + '€' }}</div>
@@ -332,7 +285,9 @@ export default {
                             <h1 class="mb-5">Cart</h1>
 
                             <h4>Total price: {{ state.totalCart.toFixed(2) + '€' }}</h4>
+
                             <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
+
                                 <div>
                                     <h3 class="">{{ dish.name }}</h3>
                                     <div class="">{{ dish.price + '€' }}</div>
@@ -351,7 +306,7 @@ export default {
 
 
         </div>
-    </section>
+</section>
 </template>
 
 

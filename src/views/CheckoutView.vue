@@ -7,43 +7,123 @@ export default {
 
     data() {
         return {
-            state
+            state,
+            name: '',
+            address: '',
+            phone: '',
+            email: '',
+            cart: []
         }
     },
+    methods: {
+        addDishToCart(data) {
+            // console.log(this.cart);
+            this.cart.push(data)
+
+            this.state.cart_counter = this.cart.length
+            localStorage.setItem("cart", JSON.stringify(this.cart))
+        },
+        removeDishToCart(data) {
+            // console.log(this.cart);
+            for (var i = 0; i < this.cart.length; i++) {
+
+                if (this.cart[i].id === data.id) {
+
+                    this.cart.splice(i, 1);
+                    break
+                }
+
+            }
+        },
+    },
+    mounted() {
+        this.cart = JSON.parse(localStorage.getItem("cart"))
+        console.log(this.cart);
+
+        //payment
+        var form = document.querySelector('#cardForm');
+        var authorization = 'sandbox_g42y39zw_348pk9cgf3bgyw2b';
+
+        braintree.client.create({
+            authorization: authorization
+        }, function (err, clientInstance) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            createHostedFields(clientInstance);
+        });
+
+        function createHostedFields(clientInstance) {
+            braintree.hostedFields.create({
+                client: clientInstance,
+                styles: {
+                    'input': {
+                        'font-size': '13px',
+                        'font-family': 'courier, monospace',
+                        'font-weight': 'lighter',
+                        'color': '#ccc'
+                    },
+                    ':focus': {
+                        'color': 'black'
+                    },
+                    '.valid': {
+                        'color': '#8bdda8'
+                    }
+                },
+                fields: {
+                    number: {
+                        selector: '#card-number',
+                        placeholder: '4111 1111 1111 1111'
+                    },
+                    cvv: {
+                        selector: '#cvv',
+                        placeholder: '123'
+                    },
+                    expirationDate: {
+                        selector: '#expiration-date',
+                        placeholder: 'MM/YYYY'
+                    },
+                    postalCode: {
+                        selector: '#postal-code',
+                        placeholder: '11111'
+                    }
+                }
+            }, function (err, hostedFieldsInstance) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                var tokenize = function (event) {
+                    event.preventDefault();
+
+                    hostedFieldsInstance.tokenize(function (err, payload) {
+                        if (err) {
+                            alert('Something went wrong. Check your card details and try again.');
+                            return;
+                        }
+
+                        alert('Submit your nonce (' + payload.nonce + ') to your server here!');
+                    });
+                };
+
+                form.addEventListener('submit', tokenize, false);
+            });
+        }
+        //end payment
+    }
+
 }
 
 </script>
 
 <template>
     <div class="container">
-        <h1 class="mt-5 text-center">Checkout page</h1>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-wrapper">
-                    <div class="mb-3">
-                        <label for="" class="form-label">Name</label>
-                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Last Name</label>
-                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Address</label>
-                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">City</label>
-                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Help text</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
+        <h1 class="mt-5 text-center">You're almost there!</h1>
+        <div class="row justify-content-center">
+            <div class="col-5">
                 <div class="order-wrapper">
+
                     <div class="order" v-for="dish in state.cart">
                         <div class="my-card  my-5">
                             <div class="d-flex justify-content-center">
@@ -62,6 +142,7 @@ export default {
                                         </button>
                                     </div>
                                 </div>
+
                             </div>
 
                             <div>
@@ -73,32 +154,212 @@ export default {
 
                 </div>
             </div>
+            <div class="col-5">
+                <div class="form-wrapper">
+                    <form action="">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" name="name" id="name" v-model="name" class="form-control"
+                                placeholder="John Doe" aria-describedby="helpId">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" name="address" id="address" v-model="address" class="form-control"
+                                placeholder="" aria-describedby="helpId">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone number</label>
+                            <input type="text" name="phone" id="phone" v-model="phone" class="form-control"
+                                placeholder="0123456789" aria-describedby="helpId">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" id="email" v-model="email" class="form-control"
+                                placeholder="johndoe@example.it" aria-describedby="helpId">
+                        </div>
+                    </form>
+                </div>
+
+                <!-- payment -->
+                <div class="text-muted mt-5 mb-2">
+                    Payment data
+                </div>
+                <div class="demo-frame">
+                    <form action="/" method="post" id="cardForm">
+                        <label class="hosted-fields--label" for="card-number">Card Number</label>
+                        <div id="card-number" class="hosted-field form-control"></div>
+
+                        <label class="hosted-fields--label" for="expiration-date">Expiration Date</label>
+                        <div id="expiration-date" class="hosted-field form-control"></div>
+
+                        <label class="hosted-fields--label" for="cvv">CVV</label>
+                        <div id="cvv" class="hosted-field form-control"></div>
+
+                        <label class="hosted-fields--label" for="postal-code">Postal Code</label>
+                        <div id="postal-code" class="hosted-field form-control"></div>
+
+                        <div class="my-3">
+                            <input type="submit" class="my-btn" value="Purchase" id="submit" />
+                        </div>
+                    </form>
+                </div>
+                <!-- /payment -->
+            </div>
         </div>
-        <a class="btn btn-primary fs-3 mt-5" href="#" role="button">Payment</a>
-    </div>
+
+
+
+</div>
 </template>
 
 <style lang="scss" scoped>
+:root {
+    --black: #1f1f1f;
+    --white: #fff;
+    --main-color: #e29436;
+    --main-color-dark: #cf4835;
+    --deep-main-color: #ffc727;
+    --bg-main-color: #fffaf1;
+    --btn-main-color: #fff4d4;
+    --footer-main-color: #fff9e9;
+    --grey: #737373;
+    --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    --transition: all 0.2s linear;
+}
+
 .container {
+
+    h1 {
+        font-size: 40px;
+    }
 
     .form-wrapper,
     .order-wrapper {
         margin-top: 10%;
     }
 
-    .my-card {
+    input {
+        font-size: 15px;
+        width: 65%;
+    }
+
+    .order-card {
+        width: 65%;
+        height: 25%;
         padding: 1.5rem;
-        box-shadow: 0 0 6px 0px rgb(192, 192, 192);
+        box-shadow: 0 0 3px 0px rgb(192, 192, 192);
         border-radius: 5px;
 
-        .tipology {
-            color: #e29436;
-        }
-
         img {
-            width: 200px;
+            width: 25%;
+            height: 25%;
             border-radius: 5px;
         }
+
+        .btn-primary {
+            background-color: var(--main-color);
+            border: var(--main-color-dark);
+            color: #07051a;
+            transition: 0.5s;
+
+            &:hover {
+                background-color: var(--main-color-dark);
+            }
+        }
+
+    }
+}
+
+//payment
+.hosted-field {
+    height: 35px;
+    width: 65%;
+    padding: 12px;
+    display: inline-block;
+    box-shadow: none;
+    // font-weight: 600;
+    // font-size: 14px;
+    // border-radius: 6px;
+    // border: 1px solid #dddddd;
+    // line-height: 20px;
+    // background: #fcfcfc;
+    // margin-bottom: 12px;
+    // background: linear-gradient(to right, white 50%, #fcfcfc 50%);
+    // background-size: 200% 100%;
+    // background-position: right bottom;
+    // transition: all 300ms ease-in-out;
+}
+
+.hosted-fields--label {
+    // font-family: courier, monospace;
+    // text-transform: uppercase;
+    // font-size: 14px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.button-container {
+    display: block;
+    text-align: center;
+}
+
+.button {
+    cursor: pointer;
+    font-weight: 500;
+    line-height: inherit;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: inline-block;
+}
+
+.button--small {
+    padding: 10px 20px;
+    font-size: 0.875rem;
+}
+
+.button--green {
+    outline: none;
+    background-color: #64d18a;
+    border-color: #64d18a;
+    color: white;
+    transition: all 200ms ease;
+}
+
+.button--green:hover {
+    background-color: #8bdda8;
+    color: white;
+}
+
+.braintree-hosted-fields-focused {
+    border: 1px solid #64d18a;
+    border-radius: 1px;
+    background-position: left bottom;
+}
+
+.braintree-hosted-fields-invalid {
+    border: 1px solid #ed574a;
+}
+
+.braintree-hosted-fields-valid {}
+
+// #cardForm {
+//     max-width: 50.75em;
+//     margin: 0 auto;
+//     padding: 1.875em;
+// }
+//end payment
+.my-btn {
+    border: 1px solid transparent;
+
+    &:hover {
+        color: var(--main-color);
+        border-color: var(--main-color);
     }
 }
 </style>
