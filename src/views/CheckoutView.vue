@@ -134,6 +134,17 @@ export default {
             border-radius: 5px;
         }
 
+        .btn-primary {
+            background-color: var(--main-color);
+            border: var(--main-color-dark);
+            color: #07051a;
+            transition: 0.5s;
+
+            &:hover {
+                background-color: var(--main-color-dark);
+            }
+        }
+
     }
 }
 </style>
