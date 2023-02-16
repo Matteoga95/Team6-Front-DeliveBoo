@@ -1,6 +1,7 @@
 <script>
 
 import { state } from '../state.js'
+import { router } from '../router'
 
 export default {
     name: 'CheckoutView',
@@ -38,7 +39,7 @@ export default {
     },
     mounted() {
         this.cart = JSON.parse(localStorage.getItem("cart"))
-        console.log(this.cart);
+        // console.log(this.cart);
 
         //payment
         var form = document.querySelector('#cardForm');
@@ -103,7 +104,12 @@ export default {
                             return;
                         }
 
-                        alert('Submit your nonce (' + payload.nonce + ') to your server here!');
+                        // alert('Submit your nonce (' + payload.nonce + ') to your server here!');
+
+                        //invio dati ordine al front-end
+                        state.sendOrder();
+                        //rimando alla SuccessView
+                        router.push({ name: 'success' })
                     });
                 };
 
@@ -151,6 +157,7 @@ export default {
             </div>
 
 
+
             <!-- cart -->
             <div class="col-lg-4  d-lg-block d-none">
                 <div class="my-card">
@@ -173,6 +180,7 @@ export default {
                             <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
                                 <font-awesome-icon icon="fa-solid fa-plus" />
                             </button>
+
                         </div>
 
                     </div>
