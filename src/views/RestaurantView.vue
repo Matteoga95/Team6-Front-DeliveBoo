@@ -193,10 +193,10 @@ export default {
                                 <div>
                                     <h3 class="">{{ dish.name }}</h3>
                                     <div class="">{{ dish.price + '€' }}</div>
-
+                                    <p>Qty: <span> {{ dish.qty }}</span> </p>
                                 </div>
-                                <h3 class="">X {{ dish.qty }}</h3>
-                                <button type="button" @click="removeDishToCart(dish)"
+
+                                <button type="button" @click="state.removeDishToCart(dish)"
                                     class=" my-4 mx-3 btn btn-danger btn-sm">
                                     <font-awesome-icon icon="fa-solid fa-minus" />
                                 </button>
@@ -246,9 +246,10 @@ export default {
 
                             <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
 
-                                <div>
-                                    <h3 class="">{{ dish.name }}</h3>
+                                <div class="my-3">
+                                    <h3 class="pr-5">{{ dish.name }}</h3>
                                     <div class="">{{ dish.price + '€' }}</div>
+                                    <p>Qty:<span> {{ dish.qty }}</span> </p>
                                 </div>
                                 <button type="button" @click="state.removeDishToCart(dish)"
                                     class=" my-4 mx-3 btn btn-danger btn-sm">
@@ -276,6 +277,10 @@ export default {
     --main-color: #e29436;
     --main-color-dark: #cf4835;
 
+}
+
+span {
+    font-size: larger;
 }
 
 .my-card {
