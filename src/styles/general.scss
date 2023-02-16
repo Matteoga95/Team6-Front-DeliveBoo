@@ -477,6 +477,21 @@ section.appss .content .links img {
 }
 
 /* Footer */
+footer {
+    .yellow {
+        color: var(--main-color-dark);
+    }
+
+    h4 {
+
+        color: var(--main-color-dark);
+    }
+
+    .faa {
+        color: var(--main-color-dark);
+        padding-right: 10px;
+    }
+}
 
 .footer .top {
     background-color: var(--footer-main-color);
@@ -496,7 +511,7 @@ section.appss .content .links img {
     align-items: center;
     justify-content: center;
     padding: 1.5rem 0;
-    background-color: var(--deep-main-color);
+    background-color: var(--main-color);
 }
 
 .footer .top .content p {

@@ -61,11 +61,7 @@ window.addEventListener("scroll", (e) => {
 
 </script>
 
-<template>
-
-
-
-    <!-- Home -->
+<template><!-- Home -->
     <!-- SE SERVE STA QUA -->
     <section class="home" id="home">
         <div class="content">
@@ -160,7 +156,7 @@ window.addEventListener("scroll", (e) => {
         </div>
 
         <div class="image">
-            <img src="../assets/img/illus deliver.svg" alt="" />
+            <img src="./assets/img/illus deliver.svg" alt="" />
         </div>
     </section>
 
@@ -264,8 +260,7 @@ window.addEventListener("scroll", (e) => {
     <!-- Go To Top -->
     <div class="scroll-top">
         <img src="../assets/img/arrow-up-outline.svg" alt="" />
-    </div>
-
+</div>
 </template>
 
 <style lang="scss" scoped>

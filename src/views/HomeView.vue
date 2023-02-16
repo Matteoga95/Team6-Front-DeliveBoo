@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<template><!-- Home -->
+<template>
     <section class="home p-0 container mt-5" id="home">
         <div class="content pb-5">
             <div class="d-flex align-items-center pb-5 flex-md-row flex-column">
@@ -52,6 +52,43 @@ export default {
                 <SearchHome :tipologies="state.tipologies" :restaurants="state.restaurants" />
 
             </div>
+        </div>
+    </section>
+
+
+
+    <!-- About #2 -->
+    <section class="about about-2">
+        <div class="content">
+            <h3>
+                <span class="yellow">Deliver</span> the products with best safety
+            </h3>
+            <p>
+                Lorem ipsum dolor sit amet,adipiscing elit. Eu, montes, metus
+                porttitor consectetur pretium. Euismod imperdiet pellentesque cursus
+                in netus.
+            </p>
+
+        </div>
+
+        <div class="image">
+            <img src="../assets/img/illus deliver.svg" alt="" />
+        </div>
+    </section>
+    <!-- About #3 -->
+    <section class="about about-3" style="gap: 3rem 13rem">
+        <div class="image">
+            <img src="../assets/img/buying online.svg" alt="" />
+        </div>
+
+        <div class="content">
+            <h3><span class="yellow">Track</span> your order very easily</h3>
+            <p>
+                Lorem ipsum dolor sit amet,adipiscing elit. Eu, montes, metus
+                porttitor consectetur pretium. Euismod imperdiet pellentesque cursus
+                in netus.
+            </p>
+
         </div>
 </section>
 </template>
