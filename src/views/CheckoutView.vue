@@ -144,13 +144,15 @@ export default {
         </div>
 
         <h1 class="mt-5 text-center">You're almost there!</h1>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center g-5 p-5">
             <!-- cart -->
             <div class=" col-lg-4 d-lg-none col">
                 <div class="my-card">
                     <div class="col-4 w-100">
-                        <h1 class="mb-5">Cart</h1>
-                        <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
+                        <div class="d-flex">
+                            <h1 class="mb-5">Cart</h1>
+                            <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
+                        </div>
 
                         <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
 
@@ -169,7 +171,6 @@ export default {
                                     Add
                                 </button>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -179,28 +180,33 @@ export default {
             <div class="col-lg-4  d-lg-block d-none">
                 <div class="my-card">
                     <div class="col-4 w-100">
-                        <h1 class="mb-5">Cart</h1>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h1 class="">Cart</h1>
+                            <h2 class="main-color">Total price: {{ state.total_cart.toFixed(2) + '€' }}</h2>
+                        </div>
 
-                        <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
+                        <div v-for="dish in state.cart">
 
-                        <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="my-3">
+                                    <h3 class="pr-5">{{ dish.name }}</h3>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="me-3 main-color">{{ dish.price + '€' }}</div>
+                                        <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                    </div>
+                                </div>
 
-                            <div class="my-3">
-                                <h3 class="pr-5">{{ dish.name }}</h3>
-                                <div class="">{{ dish.price + '€' }}</div>
-                                <p>Qty:<span> {{ dish.qty }}</span> </p>
+                                <div class="btn-wrapper">
+                                    <button type="button" @click="state.removeDishToCart(dish)"
+                                        class=" my-4 mx-3 btn btn-sm btn-danger btn-sm">
+                                        Remove
+                                    </button>
+                                    <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-sm btn-primary">
+                                        Add
+                                    </button>
+                                </div>
                             </div>
-
-                            <div class="btn-wrapper">
-                                <button type="button" @click="state.removeDishToCart(dish)"
-                                    class=" my-4 mx-3 btn btn-danger btn-sm">
-                                    Remove
-                                </button>
-                                <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
-                                    Add
-                                </button>
-                            </div>
-
                         </div>
                     </div>
                 </div>
