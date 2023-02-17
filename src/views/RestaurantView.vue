@@ -198,7 +198,7 @@ export default {
 
                                 <button type="button" @click="state.removeDishToCart(dish)"
                                     class=" my-4 mx-3 btn btn-danger btn-sm">
-                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                    Remove <font-awesome-icon icon="fa-solid fa-xmark" />
                                 </button>
 
                             </div>
@@ -224,7 +224,7 @@ export default {
                                 <div class="align-self-center text-end">
                                     <button @click="state.addDishToCart(dish)"
                                         class="btn py-2 px-3 mx-4 btn-primary btn-sm d-flex align-items-center">
-                                        +
+                                        Add <font-awesome-icon icon="fa-solid fa-cart-shopping" />
                                     </button>
                                 </div>
 
@@ -253,7 +253,7 @@ export default {
                                 </div>
                                 <button type="button" @click="state.removeDishToCart(dish)"
                                     class=" my-4 mx-3 btn btn-danger btn-sm">
-                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                    Remove <font-awesome-icon icon="fa-solid fa-xmark" />
                                 </button>
                             </div>
                             <router-link class="btn btn-primary my-3 p-3" :to="{ name: 'checkout' }"
