@@ -71,6 +71,9 @@ export default {
             this.state.cart_counter = this.state.cart.length
             // localStorage.setItem("cart", JSON.stringify(this.cart))
 
+            this.state.total_cart = this.state.getTotal_cart(this.state.cart)
+
+            localStorage.setItem("total", JSON.stringify(this.state.total_cart))
 
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
