@@ -129,14 +129,15 @@ export default {
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title">Ops!</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Some text in the modal.</p>
+                        <p>Something went wrong. Check your card details and try again.</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <div type="button" class="btn btn-default" data-dismiss="modal">Click outside this window to try
+                            again
+                        </div>
                     </div>
                 </div>
             </div>
