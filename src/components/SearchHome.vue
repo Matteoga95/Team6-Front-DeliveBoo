@@ -67,17 +67,24 @@ export default {
                 <div class="row row-cols-xl-2 row-cols-1">
                     <div v-for="restaurant in state.filteredRestaurants">
                         <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }" class="my-card d-flex">
-                            <img width="200" :src="state.imagePath(restaurant.cover_image)" alt="">
-                            <div class="col">
-                                <div class="details p-3 d-flex flex-column justify-content-evenly">
+                            <img class="d-sm-inline-block d-none" width="200" :src="state.imagePath(restaurant.cover_image)"
+                                alt="">
+                            <div class="col d-flex">
+                                <div class="details p-3 d-flex flex-column justify-content-evenly w-100">
                                     <h1>{{ restaurant.name }}</h1>
                                     <div class="d-flex">
-                                        <div class="type pe-2" v-for="tipology in restaurant.tipologies">
-                                            {{ tipology.name }}
+                                        <div class="type pe-2 w-100">
+                                            <div class="d-flex flex-wrap justify-content-start">
+                                                <div v-for="tipology in restaurant.tipologies" class="col-auto px-1">{{
+                                                    tipology.name
+                                                }}</div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="address">{{ restaurant.address }}</div>
                                 </div>
+                                <img class="d-sm-none d-inline-block small_image w-25"
+                                    :src="state.imagePath(restaurant.cover_image)" alt="">
                             </div>
                         </router-link>
                     </div>
@@ -105,6 +112,11 @@ export default {
         object-fit: cover;
         border-radius: 5px 0 0 5px;
         height: 14rem;
+    }
+
+    .small_image {
+        height: 10rem;
+        // width: 25%;
     }
 
     .details {
