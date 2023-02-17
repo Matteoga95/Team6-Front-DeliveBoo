@@ -192,61 +192,63 @@ export default {
                     <div class="text-muted m-2">
                         Customer data
                     </div>
-                    <div class="form-wrapper my-card">
-                        <form action="">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" name="name" id="name" v-model="state.name" class=" w-100 form-control"
-                                    placeholder="John Doe" aria-describedby="helpId">
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" name="address" id="address" v-model="state.address"
-                                    class="form-control w-100" placeholder="" aria-describedby="helpId">
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Phone number</label>
-                                <input type="text" name="phone" id="phone" v-model="state.phone" class="w-100 form-control"
-                                    placeholder="0123456789" aria-describedby="helpId">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" id="email" v-model="email" class="w-100 form-control"
-                                    placeholder="johndoe@example.it" aria-describedby="helpId">
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- payment -->
-                    <div class="text-muted mt-5 mb-2">
-                        Payment data
-                    </div>
-                    <div class="form-wrapper my-card">
+                    <div class="form-wrapper">
                         <form action="/" method="post" id="cardForm">
-                            <label class="hosted-fields--label" for="card-number">Card Number</label>
-                            <div id="card-number" class="hosted-field w-100 form-control"></div>
-
-                            <label class="hosted-fields--label" for="expiration-date">Expiration Date</label>
-                            <div id="expiration-date" class="hosted-field w-100 form-control"></div>
-
-                            <label class="hosted-fields--label" for="cvv">CVV</label>
-                            <div id="cvv" class="hosted-field w-100 form-control"></div>
-
-                            <label class="hosted-fields--label" for="postal-code">Postal Code</label>
-                            <div id="postal-code" class="hosted-field w-100 form-control"></div>
-
-                            <div class="my-3">
-                                <input type="submit" class="w-100 my-btn" value="Purchase" id="submit" />
+                            <div class="customer-data my-card">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name*</label>
+                                    <input type="text" name="name" id="name" v-model="state.name"
+                                        class=" w-100 form-control" placeholder="John Doe" aria-describedby="helpId"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Address*</label>
+                                    <input type="text" name="address" id="address" v-model="state.address"
+                                        class="form-control w-100" placeholder="" aria-describedby="helpId" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone number*</label>
+                                    <input type="text" name="phone" id="phone" v-model="state.phone"
+                                        class="w-100 form-control" placeholder="0123456789" aria-describedby="helpId"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" name="email" id="email" v-model="email" class="w-100 form-control"
+                                        placeholder="johndoe@example.it" aria-describedby="helpId">
+                                </div>
                             </div>
+
+                            <!-- payment -->
+                            <div class="text-muted mt-5 mb-2">
+                                Payment data
+                            </div>
+                            <div class="payment-data my-card">
+
+                                <label class="hosted-fields--label" for="card-number">Card Number*</label>
+                                <div id="card-number" class="hosted-field w-100 form-control"></div>
+
+                                <label class="hosted-fields--label" for="expiration-date">Expiration Date*</label>
+                                <div id="expiration-date" class="hosted-field w-100 form-control"></div>
+
+                                <label class="hosted-fields--label" for="cvv">CVV*</label>
+                                <div id="cvv" class="hosted-field w-100 form-control"></div>
+
+                                <label class="hosted-fields--label" for="postal-code">Postal Code*</label>
+                                <div id="postal-code" class="hosted-field w-100 form-control"></div>
+
+                                <button type="submit" id="submit" class="mt-3 w-100 my-btn"
+                                    value="Purchase">Purchase</button>
+                            </div>
+                            <!-- /payment -->
                         </form>
+
                     </div>
+
                 </div>
-                <!-- /payment -->
+                <span class="text-muted fs-4">* Required field</span>
             </div>
         </div>
-
-
-
     </div>
 </template>
 
@@ -273,10 +275,9 @@ export default {
         font-size: 40px;
     }
 
-    .form-wrapper,
-    // .order-wrapper {
-    //     // margin-top: 10%;
-    // }
+    .form-wrapper {
+        margin-bottom: 10%;
+    }
 
     input {
         font-size: 15px;
