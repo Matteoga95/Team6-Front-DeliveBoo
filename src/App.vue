@@ -1,12 +1,24 @@
 <script>
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
-
+import { state } from './state';
+import { router } from './router'
 export default {
     components: {
         AppHeader,
         AppFooter,
+    },
+    data() {
+        return {
+            state,
+
+
+        }
+    },
+    mounted() {
+        state.router = router
     }
+
 }
 </script>
 
@@ -18,7 +30,7 @@ export default {
 
         <AppFooter></AppFooter>
 
-</body>
+    </body>
 </template>
 
 <style lang="scss">

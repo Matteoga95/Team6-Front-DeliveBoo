@@ -1,7 +1,7 @@
 <script>
 
 import { state } from '../state.js'
-import { router } from '../router'
+// import { router } from '../router'
 
 export default {
     name: 'CheckoutView',
@@ -105,7 +105,7 @@ export default {
                         //invio dati ordine al front-end
                         state.sendOrder();
                         //rimando alla SuccessView
-                        router.push({ name: 'success' })
+                        state.router.push({ name: 'success' })
                     });
                 };
 
@@ -243,7 +243,7 @@ export default {
 
 
 
-</div>
+    </div>
 </template>
 
 <style lang="scss" scoped>

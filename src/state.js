@@ -5,6 +5,7 @@ import axios from 'axios'
 export const state = reactive({
     baseUrl: 'http://127.0.0.1:8001/',
     restaurants: [],
+    router: Object,
     tipologies: [],
     single_restaurant: [],
     selectedTipes: [],
