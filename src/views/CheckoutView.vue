@@ -142,15 +142,14 @@ export default {
                             <div class="btn-wrapper-md-sm">
                                 <button type="button" @click="state.removeDishToCart(dish)"
                                     class=" my-4 mx-3 btn btn-danger btn-sm">
-                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                    Remove <font-awesome-icon icon="fa-solid fa-xmark" />
                                 </button>
                                 <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
-                                    <font-awesome-icon icon="fa-solid fa-plus" />
+                                    Add <font-awesome-icon icon="fa-solid fa-cart-shopping" />
                                 </button>
                             </div>
 
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -176,15 +175,14 @@ export default {
                             <div class="btn-wrapper">
                                 <button type="button" @click="state.removeDishToCart(dish)"
                                     class=" my-4 mx-3 btn btn-danger btn-sm">
-                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                    Remove <font-awesome-icon icon="fa-solid fa-xmark" />
                                 </button>
                                 <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
-                                    <font-awesome-icon icon="fa-solid fa-plus" />
+                                    Add <font-awesome-icon icon="fa-solid fa-cart-shopping" />
                                 </button>
                             </div>
 
                         </div>
-
                     </div>
                 </div>
             </div>
