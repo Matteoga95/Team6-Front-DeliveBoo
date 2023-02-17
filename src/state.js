@@ -15,7 +15,7 @@ export const state = reactive({
     name: '',
     address: '',
     phone: '',
-    total_cart: 0,
+    total_cart: JSON.parse(localStorage.getItem("total")),
     success: false,
     loading: false,
     errors: {},
@@ -161,6 +161,7 @@ export const state = reactive({
             const dish_total = dish.price * dish.qty
             total += dish_total
         });
+        state.total_cart = localStorage.setItem("total", total)
         return total
     },
     addDishToCart(dish) {
