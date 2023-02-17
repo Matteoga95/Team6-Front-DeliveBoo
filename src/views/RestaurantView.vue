@@ -51,11 +51,12 @@ export default {
             this.state.new_dish_cart = []
             this.state.cart_counter = this.state.cart.length
             //ritorna il carrello di prima
-            for (let i = 0; i < this.state.cart.length; i++) {
+            // for (let i = 0; i < this.state.cart.length; i++) {
 
-                this.state.total_cart += parseFloat(this.state.cart[i].price)
+            //     this.state.total_cart += parseFloat(this.state.cart[i].price)
 
-            }
+            // }
+            // this.state.total_cart = 
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
 
@@ -73,11 +74,11 @@ export default {
 
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
+            // state.getTotal_cart()
 
             //azzero il totale e aggiungo nuovo prezzo
 
-            const price = parseFloat(this.state.new_dish_cart.price)
-            this.state.total_cart = price
+            // const price = parseFloat(this.state.new_dish_cart.price)
             // console.log(this.total_cart, 'totale');
 
 
