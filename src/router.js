@@ -7,6 +7,9 @@ import SuccessView from './views/SuccessView.vue';
 import CheckoutView from './views/CheckoutView.vue'
 
 const router = createRouter({
+    scrollBehavior(to, from) {
+        return { top: 0 }
+    },
     history: createWebHistory(),
     routes: [
         {
