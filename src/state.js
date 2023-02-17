@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 export const state = reactive({
-    baseUrl: 'http://127.0.0.1:8001/',
+    baseUrl: 'http://127.0.0.1:8000/',
     restaurants: [],
     router: Object,
     tipologies: [],

@@ -9,6 +9,7 @@ export default {
     data() {
         return {
             state,
+            email: '',
             cart: []
         }
     },
@@ -124,7 +125,7 @@ export default {
         <h1 class="mt-5 text-center">You're almost there!</h1>
         <div class="row justify-content-center">
             <!-- cart -->
-            <div class=" col-lg-4  d-lg-none col">
+            <div class=" col-lg-4 d-lg-none col">
                 <div class="my-card">
                     <div class="col-4 w-100">
                         <h1 class="mb-5">Cart</h1>
@@ -138,13 +139,15 @@ export default {
                                 <p>Qty: <span> {{ dish.qty }}</span> </p>
                             </div>
 
-                            <button type="button" @click="state.removeDishToCart(dish)"
-                                class=" my-4 mx-3 btn btn-danger btn-sm">
-                                <font-awesome-icon icon="fa-solid fa-minus" />
-                            </button>
-                            <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
-                                <font-awesome-icon icon="fa-solid fa-plus" />
-                            </button>
+                            <div class="btn-wrapper-md-sm">
+                                <button type="button" @click="state.removeDishToCart(dish)"
+                                    class=" my-4 mx-3 btn btn-danger btn-sm">
+                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                </button>
+                                <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
+                                    <font-awesome-icon icon="fa-solid fa-plus" />
+                                </button>
+                            </div>
 
                         </div>
 
@@ -154,7 +157,7 @@ export default {
 
 
 
-            <!-- cart -->
+            <!-- cart lg -->
             <div class="col-lg-4  d-lg-block d-none">
                 <div class="my-card">
                     <div class="col-4 w-100">
@@ -169,13 +172,16 @@ export default {
                                 <div class="">{{ dish.price + '€' }}</div>
                                 <p>Qty:<span> {{ dish.qty }}</span> </p>
                             </div>
-                            <button type="button" @click="state.removeDishToCart(dish)"
-                                class=" my-4 mx-3 btn btn-danger btn-sm">
-                                <font-awesome-icon icon="fa-solid fa-minus" />
-                            </button>
-                            <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
-                                <font-awesome-icon icon="fa-solid fa-plus" />
-                            </button>
+
+                            <div class="btn-wrapper">
+                                <button type="button" @click="state.removeDishToCart(dish)"
+                                    class=" my-4 mx-3 btn btn-danger btn-sm">
+                                    <font-awesome-icon icon="fa-solid fa-minus" />
+                                </button>
+                                <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
+                                    <font-awesome-icon icon="fa-solid fa-plus" />
+                                </button>
+                            </div>
 
                         </div>
 
