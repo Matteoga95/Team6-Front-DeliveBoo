@@ -187,7 +187,10 @@ export default {
                     <div class="my-card">
                         <div class="col-4 w-100">
                             <h1 class="mb-5">Cart</h1>
-                            <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
+                            <div v-if="state.total_cart == null">
+                                <h4>Total price: 0,00 €</h4>
+                            </div>
+                            <h4 v-else>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
 
                             <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
 
@@ -225,7 +228,7 @@ export default {
                                 <div class="align-self-center text-end">
                                     <button @click="state.addDishToCart(dish)"
                                         class="btn py-2 px-3 mx-4 btn-primary btn-sm d-flex align-items-center">
-                                        Add <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+                                        Add
                                     </button>
                                 </div>
 
@@ -241,9 +244,10 @@ export default {
                 <div class="col-3 d-lg-block d-none">
                     <div class="my-card">
                         <div class="col-4 w-100">
-                            <h1 class="mb-5">Cart</h1>
-
-                            <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
+                            <div v-if="state.total_cart == null">
+                                <h4>Total price: 0,00 €</h4>
+                            </div>
+                            <h4 v-else>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
 
                             <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
 
