@@ -97,11 +97,10 @@ export default {
 
                     hostedFieldsInstance.tokenize(function (err, payload) {
                         if (err) {
-                            alert('Something went wrong. Check your card details and try again.');
+                            $('#myModal').modal('show')
+
                             return;
                         }
-
-                        // alert('Submit your nonce (' + payload.nonce + ') to your server here!');
 
                         //invio dati ordine al front-end
                         state.sendOrder();
@@ -122,6 +121,28 @@ export default {
 
 <template>
     <div class="container">
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Ops!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Something went wrong. Check your card details and try again.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div type="button" class="btn btn-default" data-dismiss="modal">Click outside this window to try
+                            again
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h1 class="mt-5 text-center">You're almost there!</h1>
         <div class="row justify-content-center">
             <!-- cart -->
@@ -153,8 +174,6 @@ export default {
                     </div>
                 </div>
             </div>
-
-
 
             <!-- cart lg -->
             <div class="col-lg-4  d-lg-block d-none">
