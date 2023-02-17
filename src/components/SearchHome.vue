@@ -40,10 +40,10 @@ export default {
 </script>
         
 <template>
-    <div class="tipologies d-flex py-3  flex-lg-row flex-column"
-        :class="state.filteredRestaurants.length > 0 ? '' : ''">
+    <div class="tipologies d-flex py-3  flex-lg-row flex-column" :class="state.filteredRestaurants.length > 0 ? '' : ''">
 
-        <div class="mb-4 px-5 sidebar_tips d-flex flex-column align-items-lg-start align-items-center">
+        <div
+            class="mb-4 px-5 sidebar_tips d-flex flex-lg-column flex-sm-row flex-column align-items-lg-start align-items-center">
 
             <div class="col-md-6">
                 <select id="types_select" v-model="state.selectedTipes" class="dropdown" multiple>
@@ -66,8 +66,7 @@ export default {
             <div class="container">
                 <div class="row row-cols-xl-2 row-cols-1">
                     <div v-for="restaurant in state.filteredRestaurants">
-                        <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"
-                            class="my-card d-flex">
+                        <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }" class="my-card d-flex">
                             <img width="200" :src="state.imagePath(restaurant.cover_image)" alt="">
                             <div class="col">
                                 <div class="details p-3 d-flex flex-column justify-content-evenly">
@@ -88,20 +87,9 @@ export default {
             </div>
         </div>
     </div>
-
 </template>
 
 <style lang="scss" scoped>
-.tipologies {
-    .sidebar_tips {
-        height: 900px;
-
-        @media (max-width: 991px) {
-            height: 100%;
-        }
-    }
-}
-
 .my-card {
     padding: 0;
     margin-bottom: 1rem;

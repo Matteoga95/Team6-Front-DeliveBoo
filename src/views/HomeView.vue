@@ -42,16 +42,13 @@ export default {
                 <div class="image col-md-6 col px-5">
                     <img src="../assets/img/Delivery Address.svg" alt="" />
                 </div>
+                <span id="tipologies"></span>
             </div>
         </div>
 
 
-        <span id="tipologies"></span>
-        <div class="pt-5">
-            <div class="pt-5 mt-5">
-                <SearchHome :tipologies="state.tipologies" :restaurants="state.restaurants" />
-
-            </div>
+        <div class="">
+            <SearchHome :tipologies="state.tipologies" :restaurants="state.restaurants" />
         </div>
     </section>
 
@@ -90,7 +87,7 @@ export default {
             </p>
 
         </div>
-</section>
+    </section>
 </template>
 
 
