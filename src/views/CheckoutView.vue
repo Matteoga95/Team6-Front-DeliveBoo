@@ -143,64 +143,79 @@ export default {
             </div>
         </div>
 
-        <h1 class="mt-5 text-center">You're almost there!</h1>
-        <div class="row justify-content-center">
-            <!-- cart -->
-            <div class=" col-lg-4 d-lg-none col">
-                <div class="my-card">
-                    <div class="col-4 w-100">
-                        <h1 class="mb-5">Cart</h1>
-                        <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
+        <h1 class="py-5 text-center">You're almost there!</h1>
+        <div class="row justify-content-center g-5">
+            <!-- cart sm-->
+            <!-- <div class=" col-lg-4 d-lg-none col">
+                                                                                                                        <div class="my-card">
+                                                                                                                            <div class="col-4 w-100">
+                                                                                                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                                                                                                    <h1 class="fs-1">Carts</h1>
+                                                                                                                                    <h2 class="main-color">Total price: {{ state.total_cart.toFixed(2) + '€' }}</h2>
+                                                                                                                                </div>
 
-                        <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
+                                                                                                                                <div v-for="dish in state.cart">
 
-                            <div>
-                                <h3 class="">{{ dish.name }}</h3>
-                                <div class="">{{ dish.price + '€' }}</div>
-                                <p>Qty: <span> {{ dish.qty }}</span> </p>
-                            </div>
+                                                                                                                                    <hr>
+                                                                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                                                                        <div class="my-3">
+                                                                                                                                            <h3 class="pr-5">{{ dish.name }}</h3>
+                                                                                                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                                                                                                <div class="me-3 main-color">{{ dish.price + '€' }}</div>
+                                                                                                                                                <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
 
-                            <div class="btn-wrapper-md-sm">
-                                <button type="button" @click="state.removeDishToCart(dish)"
-                                    class=" my-4 mx-3 btn btn-danger btn-sm">
-                                    Remove
-                                </button>
-                                <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
-                                    Add
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                                                                                                                        <div class="btn-wrapper">
+                                                                                                                                            <button @click="state.addDishToCart(dish)"
+                                                                                                                                                class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
+                                                                                                                                                Add
+                                                                                                                                            </button>
+                                                                                                                                            <button type="button" @click="state.removeDishToCart(dish)"
+                                                                                                                                                class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
+                                                                                                                                                Remove
+                                                                                                                                            </button>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div> -->
 
             <!-- cart lg -->
-            <div class="col-lg-4  d-lg-block d-none">
+            <div class="col-lg-4">
                 <div class="my-card">
                     <div class="col-4 w-100">
-                        <h1 class="mb-5">Cart</h1>
-
-                        <h4>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
-
-                        <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
-
-                            <div class="my-3">
-                                <h3 class="pr-5">{{ dish.name }}</h3>
-                                <div class="">{{ dish.price + '€' }}</div>
-                                <p>Qty:<span> {{ dish.qty }}</span> </p>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="fs-2 fw-bold">Cart</div>
+                            <div v-if="state.total_cart == null" class="main-color fs-3 fw-bold">Total price: 0,00 €</div>
+                            <div v-else class="main-color fs-3 fw-bold">Total price: {{ state.total_cart.toFixed(2) + '€' }}
                             </div>
+                        </div>
 
-                            <div class="btn-wrapper">
-                                <button type="button" @click="state.removeDishToCart(dish)"
-                                    class=" my-4 mx-3 btn btn-danger btn-sm">
-                                    Remove
-                                </button>
-                                <button @click="state.addDishToCart(dish)" class="my-4 mx-3 btn btn-primary">
-                                    Add
-                                </button>
+                        <div v-for="dish in state.cart">
+
+                            <hr>
+                            <div class="d-flex justify-content-around align-items-center">
+                                <div class="my-3">
+                                    <h3 class="pr-5">{{ dish.name }}</h3>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="me-3 main-color">{{ dish.price + '€' }}</div>
+                                        <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                    </div>
+                                </div>
+
+                                <div class="btn-wrapper d-flex flex-column justify-content-center">
+                                    <button @click="state.addDishToCart(dish)"
+                                        class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
+                                        Add
+                                    </button>
+                                    <button type="button" @click="state.removeDishToCart(dish)"
+                                        class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
+                                        Remove
+                                    </button>
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -208,8 +223,11 @@ export default {
 
             <div class="col-lg-8 col-sm-12 d-flex justify-content-center">
                 <div class="flex-fill">
-                    <div class="text-muted m-2">
-                        Customer data
+                    <div class="mb-3">
+                        <span class="text-muted me-2">
+                            Customer data
+                        </span>
+                        <span class="text-muted fs-4">* Required field</span>
                     </div>
                     <div class="form-wrapper">
                         <form action="/" method="post" id="cardForm">
@@ -265,7 +283,6 @@ export default {
                     </div>
 
                 </div>
-                <span class="text-muted fs-4">* Required field</span>
             </div>
         </div>
     </div>

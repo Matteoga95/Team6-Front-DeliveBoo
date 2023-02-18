@@ -185,38 +185,49 @@ export default {
                     </div>
                 </div>
 
-                <!-- cart -->
+                <!-- cart sm-->
                 <div class="d-lg-none col">
                     <div class="my-card">
                         <div class="col-4 w-100">
-                            <h1 class="mb-5">Cart</h1>
-                            <div v-if="state.total_cart == null">
-                                <h4>Total price: 0,00 €</h4>
-                            </div>
-                            <h4 v-else>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
-
-                            <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
-
-                                <div>
-                                    <h3 class="">{{ dish.name }}</h3>
-                                    <div class="">{{ dish.price + '€' }}</div>
-                                    <p>Qty: <span> {{ dish.qty }}</span> </p>
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="fs-2 fw-bold">Cart</div>
+                                <div v-if="state.total_cart == null" class="main-color fs-3 fw-bold">Total price: 0,00 €
                                 </div>
-
-                                <button type="button" @click="state.removeDishToCart(dish)"
-                                    class=" my-4 mx-3 btn btn-danger btn-sm">
-                                    Remove <font-awesome-icon icon="fa-solid fa-xmark" />
-                                </button>
-
+                                <div v-else class="main-color fs-3 fw-bold">Total price: {{ state.total_cart.toFixed(2) +
+                                    '€' }}
+                                </div>
                             </div>
-                            <router-link class="btn btn-primary my-3 p-3" :to="{ name: 'checkout' }"
-                                role="button">Checkout</router-link>
+
+                            <div v-for="dish in state.cart">
+
+                                <hr>
+                                <div class="d-flex justify-content-around align-items-center">
+                                    <div class="my-3">
+                                        <h3 class="pr-5">{{ dish.name }}</h3>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="me-3 main-color">{{ dish.price + '€' }}</div>
+                                            <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="btn-wrapper d-flex flex-column justify-content-center">
+                                        <button @click="state.addDishToCart(dish)"
+                                            class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
+                                            Add
+                                        </button>
+                                        <button type="button" @click="state.removeDishToCart(dish)"
+                                            class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- piatti -->
-                <div class="col-lg-6 col-12 d-flex justify-content-center dishes">
+                <div class="col-lg-6 col-12 d-flex justify-content-center dishes mt-lg-0 mt-5">
                     <div class="col-10" v-if="this.has_dishes">
                         <div v-for="dish in this.restaurant.dishes">
                             <div class="my-card d-flex p-1 my-3">
@@ -243,29 +254,43 @@ export default {
 
                 </div>
 
-                <!-- cart -->
+                <!-- cart lg-->
                 <div class="col-3 d-lg-block d-none">
                     <div class="my-card">
                         <div class="col-4 w-100">
-                            <div v-if="state.total_cart == null">
-                                <h4>Total price: 0,00 €</h4>
-                            </div>
-                            <h4 v-else>Total price: {{ state.total_cart.toFixed(2) + '€' }}</h4>
-
-                            <div class="d-flex justify-content-between align-items-center" v-for="dish in state.cart">
-
-                                <div class="my-3">
-                                    <h3 class="pr-5">{{ dish.name }}</h3>
-                                    <div class="">{{ dish.price + '€' }}</div>
-                                    <p>Qty:<span> {{ dish.qty }}</span> </p>
+                            <div class="d-flex justify-content-between align-items-center mb-4 flex-xl-row flex-column">
+                                <div class="fs-2 fw-bold">Cart</div>
+                                <div v-if="state.total_cart == null" class="main-color fs-3 fw-bold">Total price: 0,00 €
                                 </div>
-                                <button type="button" @click="state.removeDishToCart(dish)"
-                                    class=" my-4 mx-3 btn btn-danger btn-sm">
-                                    Remove <font-awesome-icon icon="fa-solid fa-xmark" />
-                                </button>
+                                <div v-else class="main-color fs-3 fw-bold">Total price: {{ state.total_cart.toFixed(2) +
+                                    '€' }}
+                                </div>
                             </div>
-                            <router-link class="btn btn-primary my-3 p-3" :to="{ name: 'checkout' }"
-                                role="button">Checkout</router-link>
+
+                            <div v-for="dish in state.cart">
+
+                                <hr>
+                                <div class="d-flex justify-content-around align-items-center">
+                                    <div class="my-3">
+                                        <h3 class="pr-5">{{ dish.name }}</h3>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="me-3 main-color">{{ dish.price + '€' }}</div>
+                                            <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="btn-wrapper d-flex flex-column justify-content-center">
+                                        <button @click="state.addDishToCart(dish)"
+                                            class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
+                                            Add
+                                        </button>
+                                        <button type="button" @click="state.removeDishToCart(dish)"
+                                            class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
