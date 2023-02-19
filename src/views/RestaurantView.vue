@@ -156,7 +156,7 @@ export default {
 
                 <!-- banner con la foto del ristorante -->
                 <div class="col-lg-3 col-md-6 restaurants mb-3">
-                    <div class="my-card">
+                    <div class="my-card-info">
                         <div class="d-flex justify-content-center">
                             <img class="mb-4 cover" :src="state.imagePath(restaurant.cover_image)" alt="">
                         </div>
@@ -187,7 +187,7 @@ export default {
 
                 <!-- cart sm-->
                 <div class="d-lg-none col">
-                    <div class="my-card">
+                    <div class="my-card-info">
                         <div class="col-4 w-100">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <div class="fs-2 fw-bold">Cart</div>
@@ -197,33 +197,36 @@ export default {
                                     '€' }}
                                 </div>
                             </div>
+                            <div class="cart-h">
+                                <div v-for="dish in state.cart">
 
-                            <div v-for="dish in state.cart">
-
-                                <hr>
-                                <div class="d-flex justify-content-around align-items-center">
-                                    <div class="my-3">
-                                        <h3 class="pr-5">{{ dish.name }}</h3>
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="me-3 main-color">{{ dish.price + '€' }}</div>
-                                            <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-around align-items-center">
+                                        <div class="my-3">
+                                            <h3 class="pr-5">{{ dish.name }}</h3>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="me-3 main-color">{{ dish.price + '€' }}</div>
+                                                <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="btn-wrapper d-flex flex-column justify-content-center">
-                                        <button @click="state.addDishToCart(dish)"
-                                            class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
-                                            Add
-                                        </button>
-                                        <button type="button" @click="state.removeDishToCart(dish)"
-                                            class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
-                                            Remove
-                                        </button>
+                                        <div class="btn-wrapper d-flex flex-column justify-content-center">
+                                            <button @click="state.addDishToCart(dish)"
+                                                class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
+                                                Add
+                                            </button>
+                                            <button type="button" @click="state.removeDishToCart(dish)"
+                                                class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
+                                                Remove
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
+
                 </div>
 
                 <!-- piatti -->
@@ -254,9 +257,12 @@ export default {
 
                 </div>
 
+                <button @click="state.router.push({ name: 'checkout' })"
+                    class=" only-sm my-5 w-100 my-btn">Checkout</button>
+
                 <!-- cart lg-->
                 <div class="col-3 d-lg-block d-none">
-                    <div class="my-card">
+                    <div class="my-card-info">
                         <div class="col-4 w-100">
                             <div class="d-flex justify-content-between align-items-center mb-4 flex-xl-row flex-column">
                                 <div class="fs-2 fw-bold">Cart</div>
@@ -267,32 +273,37 @@ export default {
                                 </div>
                             </div>
 
-                            <div v-for="dish in state.cart">
+                            <div class="cart-h">
+                                <div v-for="dish in state.cart">
 
-                                <hr>
-                                <div class="d-flex justify-content-around align-items-center">
-                                    <div class="my-3">
-                                        <h3 class="pr-5">{{ dish.name }}</h3>
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="me-3 main-color">{{ dish.price + '€' }}</div>
-                                            <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-around align-items-center">
+                                        <div class="my-3">
+                                            <h3 class="pr-5">{{ dish.name }}</h3>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="me-3 main-color">{{ dish.price + '€' }}</div>
+                                                <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="btn-wrapper d-flex flex-column justify-content-center">
-                                        <button @click="state.addDishToCart(dish)"
-                                            class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
-                                            Add
-                                        </button>
-                                        <button type="button" @click="state.removeDishToCart(dish)"
-                                            class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
-                                            Remove
-                                        </button>
+                                        <div class="btn-wrapper d-flex flex-column justify-content-center">
+                                            <button @click="state.addDishToCart(dish)"
+                                                class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
+                                                Add
+                                            </button>
+                                            <button type="button" @click="state.removeDishToCart(dish)"
+                                                class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
+                                                Remove
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
+
+                    <button @click="state.router.push({ name: 'checkout' })" class=" my-5 w-100 my-btn">Checkout</button>
                 </div>
             </div>
 
@@ -304,6 +315,36 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/general.scss';
+
+.my-btn {
+    border: 1px solid transparent;
+
+    &:hover {
+        color: var(--main-color);
+        border-color: var(--main-color);
+    }
+}
+
+.only-sm {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .only-sm {
+        display: block;
+
+    }
+}
+
+
+
+.cart-h {
+
+    overflow-y: scroll;
+    max-height: 330px;
+
+
+}
 
 :root {
 
