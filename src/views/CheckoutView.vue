@@ -144,45 +144,9 @@ export default {
         </div>
 
         <h1 class="py-5 text-center">You're almost there!</h1>
-        <div class="row justify-content-center g-5">
-            <!-- cart sm-->
-            <!-- <div class=" col-lg-4 d-lg-none col">
-                                                                                                                        <div class="my-card">
-                                                                                                                            <div class="col-4 w-100">
-                                                                                                                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                                                                                                                    <h1 class="fs-1">Carts</h1>
-                                                                                                                                    <h2 class="main-color">Total price: {{ state.total_cart.toFixed(2) + '€' }}</h2>
-                                                                                                                                </div>
+        <div class="row justify-content-center g-md-5 g-0 w-100">
 
-                                                                                                                                <div v-for="dish in state.cart">
-
-                                                                                                                                    <hr>
-                                                                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                                                                        <div class="my-3">
-                                                                                                                                            <h3 class="pr-5">{{ dish.name }}</h3>
-                                                                                                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                                                                                                <div class="me-3 main-color">{{ dish.price + '€' }}</div>
-                                                                                                                                                <div>Qty:<span> {{ dish.qty }}</span> </div>
-                                                                                                                                            </div>
-                                                                                                                                        </div>
-
-                                                                                                                                        <div class="btn-wrapper">
-                                                                                                                                            <button @click="state.addDishToCart(dish)"
-                                                                                                                                                class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
-                                                                                                                                                Add
-                                                                                                                                            </button>
-                                                                                                                                            <button type="button" @click="state.removeDishToCart(dish)"
-                                                                                                                                                class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
-                                                                                                                                                Remove
-                                                                                                                                            </button>
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                                                                                                </div>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </div> -->
-
-            <!-- cart lg -->
+            <!-- cart -->
             <div class="col-lg-4">
                 <div class="my-card">
                     <div class="col-4 w-100">
@@ -193,27 +157,29 @@ export default {
                             </div>
                         </div>
 
-                        <div v-for="dish in state.cart">
+                        <div class="cart">
+                            <div v-for="dish in state.cart">
 
-                            <hr>
-                            <div class="d-flex justify-content-around align-items-center">
-                                <div class="my-3">
-                                    <h3 class="pr-5">{{ dish.name }}</h3>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="me-3 main-color">{{ dish.price + '€' }}</div>
-                                        <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                <hr>
+                                <div class="d-flex justify-content-around align-items-center">
+                                    <div class="my-3">
+                                        <h3 class="pr-5">{{ dish.name }}</h3>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="me-3 main-color">{{ dish.price + '€' }}</div>
+                                            <div>Qty:<span> {{ dish.qty }}</span> </div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="btn-wrapper d-flex flex-column justify-content-center">
-                                    <button @click="state.addDishToCart(dish)"
-                                        class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
-                                        Add
-                                    </button>
-                                    <button type="button" @click="state.removeDishToCart(dish)"
-                                        class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
-                                        Remove
-                                    </button>
+                                    <div class="btn-wrapper d-flex flex-column justify-content-center">
+                                        <button @click="state.addDishToCart(dish)"
+                                            class="my-4 mx-3 btn btn-sm btn-primary rounded-pill px-3 fs-4">
+                                            Add
+                                        </button>
+                                        <button type="button" @click="state.removeDishToCart(dish)"
+                                            class=" my-4 mx-3 btn btn-sm btn-danger rounded-pill px-3 fs-4">
+                                            Remove
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -290,6 +256,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/general.scss';
+
+.cart {
+    max-height: 330px;
+    overflow-y: overlay;
+}
 
 :root {
     --black: #1f1f1f;

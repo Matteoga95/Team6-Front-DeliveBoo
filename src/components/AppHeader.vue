@@ -28,10 +28,7 @@ export default {
 
 
         <!-- Hamburger -->
-        <!-- <div class="hamburger">
-            <img src="../assets/img/grid-outline.svg" alt="" />
-        </div> -->
-        <div class="dropdown hamburger">
+        <div class="dropdown hamburger px-5">
             <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="../assets/img/grid-outline.svg" alt="" />
                 <span class='badge badge-warning' id='lblCartCount'>{{ state.cart_counter }}</span>

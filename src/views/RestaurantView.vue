@@ -152,7 +152,7 @@ export default {
 
 
 
-            <div class="row flex-md-row flex-column">
+            <div class="row flex-md-row flex-column ">
 
                 <!-- banner con la foto del ristorante -->
                 <div class="col-lg-3 col-md-6 restaurants mb-3">
@@ -170,12 +170,12 @@ export default {
                                     <div v-for="types in this.restaurant.tipologies" class="type">{{ types.name }}</div>
                                 </div>
                                 <div class="">
-                                    <div class="d-flex my-3">
+                                    <div class="d-flex m-2">
                                         <font-awesome-icon icon="fa-solid fa-location-dot" />
                                         <div class="px-3">{{ this.restaurant.address }}</div>
 
                                     </div>
-                                    <div class="d-flex my-3">
+                                    <div class="d-flex m-2">
                                         <font-awesome-icon icon="fa-solid fa-phone" />
                                         <div class="px-3"> {{ this.restaurant.phone_number }}</div>
                                     </div>
@@ -340,7 +340,7 @@ export default {
 
 .cart-h {
 
-    overflow-y: scroll;
+    overflow-y: overlay;
     max-height: 330px;
 
 
