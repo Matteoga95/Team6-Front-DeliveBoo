@@ -28,9 +28,8 @@ export default {
                 <div class="col-md-6 col px-5">
                     <h1>Order Your Food Takeaway <span class="main-color">and many more</span></h1>
                     <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi eligendi alias nemo, eum fugiat
-                        provident consequuntur velit laudantium fuga hic reprehenderit voluptatum placeat repellat
-                        deserunt.
+                        Get your favourite food delivered in a flash. You’ll see when your rider’s picked up your order, and
+                        be able to follow them along the way. You’ll get a notification when they’re nearby, too.
                     </p>
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="main-color me-4 order">Order now!</div>
