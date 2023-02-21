@@ -280,6 +280,7 @@ export const state = reactive({
         this.cart = []
         this.getCartCounter()
 
+        this.getTotal_cart(this.cart)
     }
 
 })
