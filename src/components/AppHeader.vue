@@ -21,7 +21,7 @@ export default {
         <nav class="navbar">
             <a href="http://localhost:5173">Home</a>
             <!-- <a href="#">Restaurants</a> -->
-            <a href="http://127.0.0.1:8001/login" class="my-btn">Login</a>
+            <a href="http://127.0.0.1:8000/login" class="my-btn">Login</a>
             <font-awesome-icon icon="fa-solid fa-cart-shopping" />
             <span class='badge badge-warning' id='lblCartCount'>{{ state.cart_counter }}</span>
         </nav>
@@ -36,7 +36,7 @@ export default {
             <ul class="dropdown-menu p-4">
                 <li> <a href="http://localhost:5173">Home</a>
                 </li>
-                <li><a href="http://127.0.0.1:8001/login" class="my-btn">Login</a></li>
+                <li><a href="http://127.0.0.1:8000/login" class="my-btn">Login</a></li>
                 <li class="mt-4"><font-awesome-icon icon="fa-solid fa-cart-shopping" />
                     <span class='badge badge-warning' id='lblCartCount'>{{ state.cart_counter }}</span>
                 </li>
